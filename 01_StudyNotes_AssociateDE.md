@@ -3,9 +3,19 @@
 - [Understanding Data Engineering](#understanding-data-engineering)
  - [Archi](#archi)
 - [SQL](#sql)
- - [Introduction to SQL]
- - 
-
+ - [Introduction to SQL](#introdiction-tosql)
+ - Intermediate SQL
+ - Joining Data in SQL
+ - Project: Analyzing Students' Mental Health
+- [Database](#database)
+ - Introduction to Relational Database in SQL
+ - Database Design
+- [Data Warehousing](#data-warehousing)
+ - Data Warehousing Concepts
+ - Introduction to Snowflakes
+- [Underdtanding Data Visualization](#underdtanding-data-visualization)
+- [Project: Exploring London's Travel Network](#project-exploring-londons-travel-nNetwork)
+- Tutorial: How to Install PostgreSQL
 
 
 # Understanding Data Engineering
@@ -18,3 +28,16 @@ big data is mainly composed of sensors and devices data, social media data, ente
 # SQL
 
 ## Introduction to SQL
+## Intermediate SQL
+## Joining Data in SQL
+## Project: Analyzing Students' Mental Health
+
+# Database
+## Introduction to Relational Database in SQL
+## Database Design
+# Data Warehousing
+
+## Data Warehousing Concepts
+# Underdtanding Data Visualization
+# Project: Exploring London's Travel Network
+# Tutorial: How to Install PostgreSQL
