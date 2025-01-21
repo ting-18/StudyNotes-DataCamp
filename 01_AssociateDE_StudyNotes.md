@@ -28,7 +28,7 @@
 - Five Vs of Big Data
 Big data is commonly characterized by five Vs: volume (the quantity of data points), variety (type and nature of the data: text, image, video, audio), velocity (how fast the data is generated and processed), veracity (how trustworthy the sources are), and value (how actionable the data is). Data engineers need to take all of this into consideration.
 ![five Vs](images/01_02.png)
-### Data pipelines
+### Understanding Data pipelines
 Companies ingest data from many different sources, which needs to be processed and stored in various ways. To handle that, we need data pipelines that efficiently automate the flow from one station to the next, so that data scientists can use up-to-date, accurate, relevant data. This isn't a simple task and that's why data engineers are so important.
 #### Example: ![pipeline](images/01_03.png)
 
@@ -36,8 +36,9 @@ Companies ingest data from many different sources, which needs to be processed a
 
  We then organize the data, moving it into __databases__. It could be artist data(artist database), like name, number of followers, and associated acts. albums data(albums database), like label, producer, year of release. tracks data(tracks database), like name, length, featured artists, and number of listens. playlists data, like name, song it contains,and date of creation. customers data, like username, account opening date, subscription tier. or employees data, like name, salary, reporting manager, updated by human resources. six new pipelines.
  
- Some albums data can be extracted and stored directly. For example, album cover pictures all have the same format, so we can store them directly without having to crop them. One more pipeline!  
-  -- Employees could be split in different __tables__ by department, for example sales table, engineering table, support, etc. For now, three more pipelines!
+Some albums data can be extracted and stored directly. For example, album cover pictures all have the same format, so we can store them directly without having to crop them. One more pipeline!
+   
+Employees could be split in different __tables__ by department, for example sales table, engineering table, support, etc. For now, three more pipelines!
 
   These tables could be further split by office, for example the US, and the UK.   If data scientists had to analyze employee data(to investigate employee turnover for example), this is the data they would use. __Three more pipelines__!
 
@@ -50,6 +51,7 @@ Companies ingest data from many different sources, which needs to be processed a
 
 #### ETL
 ETL:  first E for extracting the data, then T for transforming the data, and finally, L for loading this transformed data to a new database.   The key here is that data is processed before it's stored.
+
 Example: Our data engineer, Vivian, is working on building new pipelines to generate a new product: the Weekly Playlist. It's a playlist that is created by our system every day to recommend new songs that users might like based on their tastes. Here are the steps correctly to help her build the pipeline generating a Weekly Playlist for each user. Let's start with one user, and build a pipeline to generate a Weekly Playlist for Julian, our data scientist.
 ![etl](images/01_04.png)
 
