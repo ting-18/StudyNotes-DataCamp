@@ -29,30 +29,28 @@
 Big data is commonly characterized by five Vs: volume (the quantity of data points), variety (type and nature of the data: text, image, video, audio), velocity (how fast the data is generated and processed), veracity (how trustworthy the sources are), and value (how actionable the data is). Data engineers need to take all of this into consideration.
 ![five Vs](images/01_02.png)
 ### Understanding Data pipelines
-Companies ingest data from many different sources, which needs to be processed and stored in various ways. To handle that, we need data pipelines that efficiently automate the flow from one station to the next, so that data scientists can use up-to-date, accurate, relevant data. This isn't a simple task and that's why data engineers are so important.
+Companies ingest data from many different sources, which needs to be processed and stored in various ways. To handle that, we need __data pipelines__ that efficiently automate the flow from one station to the next, so that data scientists can use up-to-date, accurate, relevant data. This isn't a simple task and that's why data engineers are so important.
 #### Example: ![pipeline](images/01_03.png)
 
  At Spotflix, we have sources from which we extract data. For example, the users' actions and listening history on the mobile Spotflix app, and the desktop Spotflix app, and the Spotflix website itself. We also have websites Spotflix uses internally, like their HR management system for payroll and benefits. The data is ingested into Spotflix's system, moving from their respective sources to our __data lake__. These are our __first three pipelines__.
 
- We then organize the data, moving it into __databases__. It could be artist data(artist database), like name, number of followers, and associated acts. albums data(albums database), like label, producer, year of release. tracks data(tracks database), like name, length, featured artists, and number of listens. playlists data, like name, song it contains,and date of creation. customers data, like username, account opening date, subscription tier. or employees data, like name, salary, reporting manager, updated by human resources. six new pipelines.
+ We then organize the data, moving it into __databases__. It could be artist data(artist database), like name, number of followers, and associated acts. albums data(albums database), like label, producer, year of release. tracks data(tracks database), like name, length, featured artists, and number of listens. playlists data, like name, song it contains,and date of creation. customers data, like username, account opening date, subscription tier. or employees data, like name, salary, reporting manager, updated by human resources. __six new pipelines__.
  
-Some albums data can be extracted and stored directly. For example, album cover pictures all have the same format, so we can store them directly without having to crop them. One more pipeline!
+Some albums data can be extracted and stored directly. For example, album cover pictures all have the same format, so we can store them directly without having to crop them. __One more pipeline__!
    
-Employees could be split in different __tables__ by department, for example sales table, engineering table, support, etc. For now, three more pipelines!
+Employees could be split in different __tables__ by department, for example sales table, engineering table, support, etc. For now, __three more pipelines__!
 
-  These tables could be further split by office, for example the US, and the UK.   If data scientists had to analyze employee data(to investigate employee turnover for example), this is the data they would use. __Three more pipelines__!
+  These tables could be further split by office, for example the US, and the UK.   If __data scientists had to analyze employee data__(to investigate employee turnover for example), this is the data they would use. __Three more pipelines__!
 
 
-- __Checking for corrupted tracks__: Tracks would need to be processed, first to check if the track is readable, then to check if the corresponding artist is in the database, to make sure the file is in the correct size and format, etc. That's one more pipeline.   The data can then be stored in a new, clean tracks database. This is one of the databases data scientists could use to build a recommendation engine by analyzing songs for similarity, for example. And that's our last pipeline!
+- __Checking for corrupted tracks__: Tracks would need to be processed, first to check if the track is readable, then to check if the corresponding artist is in the database, to make sure the file is in the correct size and format, etc. That's one more pipeline.   The data can then be stored in a new, clean tracks database. This is one of the databases data scientists could use to build a __recommendation engine__ by analyzing songs for similarity, for example. And that's our last pipeline!
   
- Data pipelines ensure the data flows efficiently through the organization. They automate extracting, transforming, combining, validating, and loading data, to reduce human intervention and errors, and decrease the time it takes for data to flow through the organization.   
- 
- The main objective, when setting up data pipelines, is to improve the efficiency with which data flows, from its ingestion to the final users.  Data pipelines ensure an efficient flow of the data through the organization.
+ __Data pipelines ensure the data flows efficiently through the organization. They automate extracting, transforming, combining, validating, and loading data, to reduce human intervention and errors, and decrease the time it takes for data to flow through the organization.__    The main objective, when setting up data pipelines, is to improve the efficiency with which data flows, from its ingestion to the final users.  Data pipelines ensure an efficient flow of the data through the organization.
 
 #### ETL
 ETL:  first E for extracting the data, then T for transforming the data, and finally, L for loading this transformed data to a new database.   The key here is that data is processed before it's stored.
 
-Example: Our data engineer, Vivian, is working on building new pipelines to generate a new product: the Weekly Playlist. It's a playlist that is created by our system every day to recommend new songs that users might like based on their tastes. Here are the steps correctly to help her build the pipeline generating a Weekly Playlist for each user. Let's start with one user, and build a pipeline to generate a Weekly Playlist for Julian, our data scientist.
+Example: Our data engineer, Vivian, is working on __building new pipelines to generate a new product: the Weekly Playlist__. It's a playlist that is created by our system every day to recommend new songs that users might like based on their tastes. Here are the steps correctly to help her build the pipeline generating a Weekly Playlist for each user. Let's start with one user, and build a pipeline to generate a Weekly Playlist for Julian, our data scientist.
 ![etl](images/01_04.png)
 
 
@@ -76,12 +74,35 @@ At Spotflix, unstructured data consists in lyrics, songs, albums pictures and ar
 databases are made of many tables. The database schema governs how tables are related.
 ### Intro to Data Warehouse and Data Lakes
 ![datalakes](images/01_09.png)
-Because no model is enforced in data lakes and any structure can be stored, it is necessary to keep a data catalog up to date. Data lakes are used by data scientists for real-time analytics on big data, while data warehouses are used by analysts for ad-hoc, read-only queries like aggregation and summarization.
-![datalakes](images/01_10.png)
-A data catalog is a source of truth that compensates for the lack of structure in a data lake. Among other things, it keeps track of where the data comes from, how it is used, who is responsible for maintaining it, and how often it gets updated. It's good practice in terms of data governance (managing the availability, usability, integrity and security of the data), and guarantees the reproducibility of the processes in case anything unexpected happens. Or if someone wants to reproduce an analysis from the very beginning, starting with the ingestion of the data. Because of the very flexible way data lakes store data, a data catalog is necessary to prevent the data lake becoming a data swamp. It's good practice to have a data catalog referencing any data that moves through your organization, so that we don't have to rely on tribal knowledge, which makes us autonomous, and makes working with the data more scalable. We can go from finding data to preparing it without having to rely on a human source of information every time we have a question.
+the data lake is where all the collected raw data gets stored, just as it was uploaded from the different sources. It's unprocessed and messy. While the data lake stores all the data, the data warehouse stores specific data for a specific use.    a data lake can take petabytes of data, but warehouses are usually pretty small - small on the scale of big data
 
+ A data lake can store any kind of data, which means that it __does not enforce any model__ on the way to store the data. This makes it cost-effective. Data warehouses __enforce a structured format, which makes them more costly to manipulate__. 
+
+However, this lack of structure in data lake also means it's very difficult to analyze. Some big data analytics using deep learning can be implemented to discover hidden patterns and trends, but that's about it, and should probably be last resort. The data warehouse, on the other hand, is optimized for analytics to drive business decisions. 
+
+Because no model is enforced in data lakes and any structure can be stored, it is necessary to keep a data catalog up to date.      Data lakes are used by data scientists for real-time analytics on big data, while data warehouses are used by analysts for ad-hoc, read-only queries like aggregation and summarization.
+![datalakes](images/01_10.png)
+A __data catalog__ is a source of truth that compensates for the lack of structure in a data lake. Among other things, it keeps track of where the data comes from, how it is used, who is responsible for maintaining it, and how often it gets updated. It's good practice in terms of __data governance__ (managing the availability, usability, integrity and security of the data), and guarantees the reproducibility of the processes in case anything unexpected happens. Or if someone wants to reproduce an analysis from the very beginning, starting with the ingestion of the data. Because of the very flexible way data lakes store data, a data catalog is necessary to prevent the data lake becoming a data swamp. 
+
+It's good practice to have a data catalog referencing any data that moves through your organization, so that we don't have to rely on tribal knowledge, which makes us autonomous, and makes working with the data more scalable. We can go from finding data to preparing it without having to rely on a human source of information every time we have a question.
 
 ## Moving and processing data
+### Processing data
+#### what is Processing data?
+data processing consists in converting raw data into meaningful information.
+- example: When we move data to the data lake, when we split it into different tables, or when we remove corrupted tracks, we are processing data.
+#### why do we need to process data?
+![img](images/01_11.png)
+- there may be some data that we don't need at all. When rolling out a new feature, we may be watching a lot of indicators to ensure it's working as expected. But once we're sure it's stable and well integrated, we don't need this data anymore.
+- Storing and processing data is not free, so we want to optimize our memory, process and network costs.
+- Uncompressed data can be ten times larger than compressed one: imagine if we had to process that! Our whole business model would collapse. Some data may come in a type, but would be easier to use in another. For example, there is a tradeoff between file size and sound quality of the music tracks.          At Spotflix, artists may upload data in wav or flac format, which are high quality master files. Letting users stream these big files would incur big network costs. The data is processed by converting the master files to the .ogg format, a lighter format with slightly lower sound quality. It's these files that we will stream to our users.
+
+
+### Scheduling data
+
+### Intro to Parallel computing
+
+### Intro to Cloud computing
 
 # SQL
 
