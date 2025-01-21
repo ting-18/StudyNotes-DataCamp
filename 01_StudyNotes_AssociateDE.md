@@ -14,7 +14,7 @@
  - Data Warehousing Concepts
  - Introduction to Snowflakes
 - [Underdtanding Data Visualization](#underdtanding-data-visualization)
-- [Project: Exploring London's Travel Network](#project-exploring-londons--travel-network)
+- [Project: Exploring London's Travel Network](#project--exploring-londons--travel-network)
 - Tutorial: How to Install PostgreSQL
 
 
