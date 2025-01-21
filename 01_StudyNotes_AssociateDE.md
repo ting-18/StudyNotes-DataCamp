@@ -55,7 +55,7 @@ Example: Our data engineer, Vivian, is working on building new pipelines to gene
 
 
 ## Storing data
-### Data Structure
+### Intro to Data Structure
 - Structured data is easy to search and organize. Data is entered following a rigid structure, like a spreadsheet where there are set columns.  You can see it follows a model: each row expects an employee and each column a specific information about that employee (team, role). Each column needs to be of a certain type. 
 - Semi-structured data resembles structured data, but allows more freedom. It's therefore relatively easy to organize, and pretty structured, but allows more flexibility. It also has different types and can be grouped to form relations, although this is not as straightforwards as with structured data - you have to pay for that flexibility at some point.. Semi-structured data is stored in NoSQL databases (as opposed to SQL) and usually leverages the JSON, XML or YAML file formats.
 ![semi-stuctured](images/01_05.png)
@@ -64,9 +64,19 @@ Example: Our data engineer, Vivian, is working on building new pipelines to gene
 Most of the data around us is unstructured. Unstructured data can be extremely valuable, but because it's hard to search and organize, this value could not be extracted until recently, with the advent of machine learning and artificial intelligence.
 - Example:
 At Spotflix, unstructured data consists in lyrics, songs, albums pictures and artists profile pictures, and music videos.        we could use machine learning algorithms to parse song spectrums, analyze beats per minute, chord progressions, genres to help categorize songs. Or, we could have artists give additional information when they upload their songs. Having them add the genre, and some tags, would make it semi-structured data, and would make searching and organizing easier.
+![eg](images/01.png)
 ![eg](images/01_07.png)
-![eg](images/01_08.png)
-
+### Intro to SQL Database
+- SQL stands for Structured Query Language. SQL is to databases what English is to pop music. It's the preferred language to query RDBMS or Relational Database Management System - basically systems that gather several tables like the Employees table, where all tables are related to each other. 
+- data engineers use SQL to create and maintain databases, while data scientists use SQL to query databases.
+![sql1](images/01_08.png)
+ integers - which mean this column will only accept whole numbers, without any decimal.  the second column, first_name, and specify it should be text (VARCHAR stands for "variable characters"). 255 means that the value entered can't be more than Two-hundred fifty-five characters long. 
+databases are made of many tables. The database schema governs how tables are related.
+### Intro to Data Warehouse and Data Lakes
+![datalakes](images/01_09.png)
+Because no model is enforced in data lakes and any structure can be stored, it is necessary to keep a data catalog up to date. Data lakes are used by data scientists for real-time analytics on big data, while data warehouses are used by analysts for ad-hoc, read-only queries like aggregation and summarization.
+![datalakes](images/01_10.png)
+A data catalog is a source of truth that compensates for the lack of structure in a data lake. Among other things, it keeps track of where the data comes from, how it is used, who is responsible for maintaining it, and how often it gets updated. It's good practice in terms of data governance (managing the availability, usability, integrity and security of the data), and guarantees the reproducibility of the processes in case anything unexpected happens. Or if someone wants to reproduce an analysis from the very beginning, starting with the ingestion of the data. Because of the very flexible way data lakes store data, a data catalog is necessary to prevent the data lake becoming a data swamp. It's good practice to have a data catalog referencing any data that moves through your organization, so that we don't have to rely on tribal knowledge, which makes us autonomous, and makes working with the data more scalable. We can go from finding data to preparing it without having to rely on a human source of information every time we have a question.
 
 
 ## Moving and processing data
@@ -74,6 +84,10 @@ At Spotflix, unstructured data consists in lyrics, songs, albums pictures and ar
 # SQL
 
 ## Introduction to SQL
+
+
+
+
 ## Intermediate SQL
 ## Joining Data in SQL
 ## Project: Analyzing Students' Mental Health
