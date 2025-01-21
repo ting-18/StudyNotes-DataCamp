@@ -95,8 +95,20 @@ data processing consists in converting raw data into meaningful information.
 ![img](images/01_11.png)
 - there may be some data that we don't need at all. When rolling out a new feature, we may be watching a lot of indicators to ensure it's working as expected. But once we're sure it's stable and well integrated, we don't need this data anymore.
 - Storing and processing data is not free, so we want to optimize our memory, process and network costs.
-- Uncompressed data can be ten times larger than compressed one: imagine if we had to process that! Our whole business model would collapse. Some data may come in a type, but would be easier to use in another. For example, there is a tradeoff between file size and sound quality of the music tracks.          At Spotflix, artists may upload data in wav or flac format, which are high quality master files. Letting users stream these big files would incur big network costs. The data is processed by converting the master files to the .ogg format, a lighter format with slightly lower sound quality. It's these files that we will stream to our users.
+- Uncompressed data can be ten times larger than compressed one: imagine if we had to process that! Our whole business model would collapse. Some data may come in a type, but would be easier to use in another. _For example_, there is a tradeoff between file size and sound quality of the music tracks.          At Spotflix, artists may upload data in wav or flac format, which are high quality master files. Letting users __stream__ these big files would incur big network costs. The data is processed by converting the master files to the .ogg format, a lighter format with slightly lower sound quality. It's these files that we will stream to our users.
+- We want to move and organize data so it is easier for analysts to find what they need. _For Example_:
+    - music files also contain metadata (name of the artist and the genre). The data is again processed to extract the metadata and store it in a database, for easy access by data analysts and data scientists.
+    - You may want your data to fit a certain schema or structure. for example, We gather employee data and fit it to the specific table schema you saw with the employee table, separating name and last name, using logic instead of text to distinguish between part-time and full-time employees, etc.
+    - Data processing also increases productivity. At Spotflix, we automate all the data preparation steps we can, so that when it arrives to data scientists, they can analyze it almost immediately. 
+#### How data engineers process data?
+![img](images/01_12.png)
+In terms of data processing, data engineers have different responsibilities. 
+- They perform data manipulation, cleaning, and tidying tasks that can be automated, and that will always need to be done, regardless of the analysis anyone wants to do with them. For example, rejecting corrupt song files, or deciding what happens with missing metadata. What should we do when the genre is missing? Do we reject the file, do we leave the genre blank, or do we provide one by default?
+- They also ensure that the data is stored in a sanely structured database, and create views on top of the database tables for easy access by analysts. Views are the output of a stored query on the data. For example, artist data and album data should be stored in separate tables in the database, but people will often want to work on these things together. That means data engineers need to create a view in the database combining both tables.
+- Data engineers also optimize the performance of databases, for example by indexing the data so it's easier to retrieve.
 
+#### Tools
+![img](images/01_13.png)
 
 ### Scheduling data
 
