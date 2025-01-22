@@ -88,6 +88,19 @@ It's good practice to have a data catalog referencing any data that moves throug
 
 NOTEs: __Google Cloud Storage (data lake).  Google BigQuery (data warehouse).  Generally, data warehouse is a kind of database.__
 
+__Data Lake__: 
+- Purpose: Stores raw, unprocessed data from various sources, often for exploratory or advanced analytics.
+- Data Format: Stores data in its original format (structured, semi-structured, or unstructured).
+- Tools: Google Cloud Storage, Amazon S3, or Azure Data Lake.
+  
+__Data Warehouse__:
+- Purpose: Stores structured and cleaned data optimized for querying and reporting.
+- Data Format: Stores structured and pre-processed data.
+- Performance: Optimized for complex SQL queries and business intelligence (BI) tools.
+- Tools: Google BigQuery, Snowflake, Amazon Redshift or Microsoft Azure Synapse.
+
+
+
 ## Moving and processing data
 ### Processing data
 #### what is Processing data?
@@ -114,19 +127,58 @@ In terms of data processing, data engineers have different responsibilities.
 
 ### Scheduling data
 
-### Intro to Parallel computing
+example: _If an employee is moving from the United States to Belgium, and therefore changing offices, someone can request an immediate update. We can update the table right away ourselves manually. Ideally, we'd like our pipeline to be automated as much as possible._ 
+
+__Automation is when you set some tasks to execute at a specific time or condition.__
+- __Automatically run at a specific time__: update the employee database every morning at 6 AM. 
+- __Automatically run if a specific condition is met__: we could set some tasks to execute if a specific condition is met. This is called __sensor scheduling__. But it requires having sensor always listening to see if somethings been added. This requires more resources and may not be worth it in this case.
+- Manual and automated systems can also also work together: if a user manually upgrades their subscription tier on the app, automated tasks need to propagate this information to other parts of the system, to unlock new features and update billing information.
+
+#### How is the data ingested?
+Batches (records are grouped and processed at intervals) or streams (records are sent individually right away)
+- Data can be ingested in __batches__, which means it's sent by groups at specific intervals. Batch processing is often cheaper because you can schedule it when resources aren't being used elsewhere, typically overnight.
+    - _For example, songs uploaded by artists may be batched and sent together to the databases every ten minutes, updates to the employees table can be batched every morning at 6:00 AM, and the revenue table used by the finance department can be updated overnight as well._
+- The data can also be __streamed__, which means individual data records are sent through the pipeline as soon as they are updated.
+    - _For example, if a user signs up, they want to be able to use the service right away, so we need to write their profile to the database immediately. Nowadays, it's inconceivable for a user to wait twenty-four hours to be able to use a service they just signed up for._
+    - _Another example of batch vs. stream processing would be offline vs online listening. If a user listens online, Spotflix can stream parts of the song one after the other. If the user wants to save the song to listen offline, we need to batch all parts of the song together so they can save it._
+- There's a third option called __real-time__, used for example in fraud detection, but for the sake of simplification and because __streaming__ is almost always real-time, we will consider them to be the same in this course._
+
+Tools for scheduling: Apache Airflow, or Luigi.
+![img](images/01_15.png)
+
+### Intro to parallel computing/ parallel processing
+Parallel computing forms the basis of almost all modern data processing tools. It is important mainly for memory concerns, but also for processing power. When big data processing tools perform a processing task, they split it up into several smaller subtasks. These subtasks are then distributed over several computers.
+![img](images/01_16.png)
+_Example: At Spotflix, we use parallel computing to convert songs from lossless format to dot ogg. It prevents us from having to load all the new songs in one computer, and to benefit from extra processing power to run the conversion scripts._
 
 ### Intro to Cloud computing
+![img](images/01_17.png)
+_example: Spotflix chose AWS,so we use S3 to store cover albums, EC2 to process songs, and RDS to store employees information._
+![img](images/01_18.png)
 
 # SQL
 
 ## Introduction to SQL
+As we've seen, tables are organized into rows and columns; in the world of databases, rows are often referred to as records and columns as fields. 
 
+- A field name should be singular rather than plural because it refers to the information contained in that field for a single record. This is why our table has "card_num" and "name" fields rather than "card_nums" and "names".
+- A unique identifier, sometimes called a "key," is just what it sounds like: a unique value which identifies a record so that it can be distinguished from other records in the same table. This value is very often a number.
+- Having more tables, each with a clearly marked subject, is generally better than having fewer tables where information about multiple subjects is combined.
+![img](images/02_01.png)
+![img](images/02_02.png)
+![img](images/02_03.png)
 
-
+### SQL flavors
+![img](images/02_04.png)
+![img](images/02_05.png)
 
 ## Intermediate SQL
+
+
+
 ## Joining Data in SQL
+![img](images/02_21.png)
+
 ## Project: Analyzing Students' Mental Health
 
 # Database
