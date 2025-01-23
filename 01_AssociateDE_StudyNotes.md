@@ -83,20 +83,20 @@ Because no model is enforced in data lakes and any structure can be stored, it i
 ![datalakes](images/01_10.png)
 A __data catalog__ is a source of truth that compensates for the lack of structure in a data lake. Among other things, it keeps track of where the data comes from, how it is used, who is responsible for maintaining it, and how often it gets updated. It's good practice in terms of __data governance__ (managing the availability, usability, integrity and security of the data), and guarantees the reproducibility of the processes in case anything unexpected happens. Or if someone wants to reproduce an analysis from the very beginning, starting with the ingestion of the data. Because of the very flexible way data lakes store data, a data catalog is necessary to prevent the data lake become a data swamp. 
 
-It's good practice to have a data catalog referencing any data that moves through your organization, so that we don't have to rely on tribal knowledge, which makes us autonomous, and makes working with the data more scalable. We can go from finding data to preparing it without having to rely on a human source of information every time we have a question.
+It's good practice to have a data catalog referencing any data that moves through your organization, so that we don't have to rely on _tribal knowledge(information that is known within a group of people but not outside of it. is often undocumented, informal, and passed down through word of mouth.)_, which makes us _autonomous(independent, self-governing, or having the power to make your own decisions.自主的）_, and makes working with the data more scalable. We can go from finding data to preparing it without having to rely on a human source of information every time we have a question.
 
 NOTEs: __Google Cloud Storage (data lake).  Google BigQuery (data warehouse).  Generally, data warehouse is a kind of database.__
 
 __Data Lake__: 
 - Purpose: Stores raw, unprocessed data from various sources, often for exploratory or advanced analytics.
 - Data Format: Stores data in its original format (structured, semi-structured, or unstructured).
-- Tools: Google Cloud Storage, Amazon S3, or Azure Data Lake.
+- Tools: __Google Cloud Storage, Amazon S3, or Azure Data Lake.__
   
 __Data Warehouse__:
 - Purpose: Stores structured and cleaned data optimized for querying and reporting.
 - Data Format: Stores structured and pre-processed data.
 - Performance: Optimized for complex SQL queries and business intelligence (BI) tools.
-- Tools: Google BigQuery, Snowflake, Amazon Redshift or Microsoft Azure Synapse.
+- Tools: __Google BigQuery, Snowflake, Amazon Redshift or Microsoft Azure Synapse.__
 
 
 
@@ -107,19 +107,21 @@ data processing consists in converting raw data into meaningful information.
 - example: When we move data to the data lake, when we split it into different tables, or when we remove corrupted tracks, we are processing data.
 #### why do we need to process data?
 ![img](images/01_11.png)
-- there may be some data that we don't need at all. When rolling out a new feature, we may be watching a lot of indicators to ensure it's working as expected. But once we're sure it's stable and well integrated, we don't need this data anymore.
-- Storing and processing data is not free, so we want to optimize our memory, process and network costs.
-- Uncompressed data can be ten times larger than compressed one: imagine if we had to process that! Our whole business model would collapse. Some data may come in a type, but would be easier to use in another. _For example_, there is a tradeoff between file size and sound quality of the music tracks.          At Spotflix, artists may upload data in wav or flac format, which are high quality master files. Letting users __stream__ these big files would incur big network costs. The data is processed by converting the master files to the .ogg format, a lighter format with slightly lower sound quality. It's these files that we will stream to our users.
-- We want to move and organize data so it is easier for analysts to find what they need. _For Example_:
-    - music files also contain metadata (name of the artist and the genre). The data is again processed to extract the metadata and store it in a database, for easy access by data analysts and data scientists.
-    - You may want your data to fit a certain schema or structure. for example, We gather employee data and fit it to the specific table schema you saw with the employee table, separating name and last name, using logic instead of text to distinguish between part-time and full-time employees, etc.
-    - Data processing also increases productivity. At Spotflix, we automate all the data preparation steps we can, so that when it arrives to data scientists, they can analyze it almost immediately. 
+- __remove useless data__: there may be some data that we don't need at all. When rolling out a new feature, we may be watching a lot of indicators to ensure it's working as expected. But once we're sure it's stable and well integrated, we don't need this data anymore.
+- __compress data__: Storing and processing data is not free, so we want to optimize our memory, process and network costs.
+    - e.g., Uncompressed data can be ten times larger than compressed one: imagine if we had to process that! Our whole business model would collapse. Some data may come in a type, but would be easier to use in another. 
+    - _For example, there is a tradeoff between file size and sound quality of the music tracks. At Spotflix, artists may upload data in wav or flac format, which are high quality master files. Letting users __stream__ these big files would incur big network costs. The data is processed by converting the master files to the .ogg format, a lighter format with slightly lower sound quality. It's these files that we will stream to our users._
+- __move and organize data for easier use by analysts__: We want to move and organize data so it is easier for analysts to find what they need. _For Example_:
+    - _music files also contain metadata (name of the artist and the genre). The data is again processed to extract the metadata and store it in a database, for easy access by data analysts and data scientists._
+    - _You may want your data to fit a certain schema or structure. for example, We gather employee data and fit it to the specific table schema you saw with the employee table, separating name and last name, using logic instead of text to distinguish between part-time and full-time employees, etc._
+- __automate all the data preparation__: Data processing also increases productivity. _At Spotflix, we automate all the data preparation steps we can, so that when it arrives to data scientists, they can analyze it almost immediately._
+  
 #### How data engineers process data?
 ![img](images/01_12.png)
 In terms of data processing, data engineers have different responsibilities. 
-- They perform data manipulation, cleaning, and tidying tasks that can be automated, and that will always need to be done, regardless of the analysis anyone wants to do with them. For example, rejecting corrupt song files, or deciding what happens with missing metadata. What should we do when the genre is missing? Do we reject the file, do we leave the genre blank, or do we provide one by default?
-- They also ensure that the data is stored in a sanely structured database, and create views on top of the database tables for easy access by analysts. Views are the output of a stored query on the data. For example, artist data and album data should be stored in separate tables in the database, but people will often want to work on these things together. That means data engineers need to create a view in the database combining both tables.
-- Data engineers also optimize the performance of databases, for example by indexing the data so it's easier to retrieve.
+- __They perform data manipulation, cleaning, and tidying tasks that can be automated, and that will always need to be done, regardless of the analysis anyone wants to do with them.__ _For example, rejecting corrupt song files, or deciding what happens with missing metadata. What should we do when the genre is missing? Do we reject the file, do we leave the genre blank, or do we provide one by default?_
+- They also __ensure that the data is stored in a sanely structured database, and create views on top of the database tables for easy access by analysts.__ Views are the output of a stored query on the data. _For example, artist data and album data should be stored in separate tables in the database, but people will often want to work on these things together. __That means data engineers need to create a view in the database combining both tables.___
+- Data engineers also __optimize the performance of databases__, _for example by indexing the data so it's easier to retrieve._
 
 #### Tools
 ![img](images/01_13.png)
