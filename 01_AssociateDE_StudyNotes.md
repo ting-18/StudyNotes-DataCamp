@@ -210,8 +210,73 @@ We use a wildcard as a placeholder for some other values to accomplish this.
     - we cannot use the alias with HAVING, but we can with ORDER BY.
 - WHERE filters individual records while HAVING filters grouped records.  
 
-## Joining Data in SQL
+## Joining Data in SQL  
+### INNER JOIN, outer joins, cross joins, self joins
+The keyword: INNER JOIN, LEFT JOIN, RIGHT JOIN, CROSS JOIN, FULL JOIN
 ![img](images/02_21.png)
+#### INNER JOIN
+- When joining on two identical column names, we can employ the USING command followed by the shared column name in parentheses.
+![img](images/02_22.png)
+
+#### Outer joins
+__Outer joins__ can obtain records from other tables, even if matches are not found for the field being joined on. 
+  - Three types of outer joins: __LEFT JOIN, RIGHT JOIN, FULL JOIN__.
+  - LEFT JOIN can also be written as LEFT OUTER JOIN. RIGHT JOIN can also be written as RIGHT OUTER JOIN. FULL JOIN an also be written as FULL OUTER JOIN.
+  - FULL JOIN: A FULL JOIN combines a LEFT JOIN and a RIGHT JOIN. ![img](images/02_24.png)
+#### CROSS JOIN
+![img](images/02_25.png)
+- Note that the syntax is very minimal, and we do not specify ON or USING with CROSS JOIN. e.g.
+  ```
+  SELECT id1, id2
+  FROM table1
+  CROSS JOIN table2;
+  ```
+#### Self joins
+self join is a special kind of join, where a table is joined with itself. These types of joins are called self joins.
+- __Self joins are used to compare values from part of a table to other values from within the same table.__
+- e.g. We want to create a new table showing all countries in the same continent as pairs.
+  ```
+  SELECT
+    p1.country AS country1,
+    p2.country AS country2,
+    p1.continent
+  FROM prime_ministers AS p1
+  INNER JOIN prime_ministers AS p1
+  ON p1.continent = p2.continent
+    AND p1.country <> p2.country
+  ```
+  ![img](images/02_26.png)  ![img](images/02_27.png)
+
+#### chaining joins, Joining on multiple keys
+![img](images/02_23.png)
+#### Defining relationships
+- one-to-many: This is the most common type of relationship, one where a single entity can be associated with several entities. e.g. authors table - books table, one author can writes many books.
+- one-to-one: e.g. individual table - fingerprint table
+- many-to-many.
+
+### Set Theory for SQL Joins
+A new way of joining data: set operators(UNION, UNION ALL, INTERSECT, EXCEPT). They require the left and right table to __have the same number of columns__ in order to compare records. Or the code wll generate an error. ALSO, the UNION columns should have the same data type!
+![img](images/02_28.png)
+- UNION, UNION ALL. they stack fields on top of one another.  The result will only use field names (or aliases, if used) of the first SELECT statement in the query.
+  - UNION : return all records from both table without duplicates.
+  - UNION ALL : return all records from both table, including duplicates.
+    ```
+    SELECT * FROM lefttable
+    UNION
+    SELECT * FROM righttable;
+    ```
+- INTERSECT: INTERSECT takes two tables as input, and returns only the records that exist in both tables.
+    - Similar to UNION, for a record to be returned, INTERSECT requires all fields to match, since in set operations we do not specify any fields to match on. This is also why it requires the left and right table to have the same number of columns in order to compare records.
+    - In INNER JOIN, similar to INTERSECT, only results where both fields match are returned. While, in this case, INNER JOIN will return duplicate values, whereas INTERSECT will only return common records once. As we know from earlier lessons, INNER JOIN will add more columns to the result set. ![img](images/02_29.png)
+- EXCEPT: it returns only records from the left table that are not present in the right table. 
+### Subquerying with semi joins and anti joins
+- Addictive joins: The joins we learned before are Addictive joins, they add columns to the original "left" table. Fields with different names are added to the result set with their original names.
+- Semi join: returns records in the first table where a condition is met in the second table. ![img](images/02_30.png)
+    - e.g. Suppose we are interested in determining the presidents of countries that gained independence before 1800. We select the fields country, continent, and president. How do we filter this data for independence year, which is a field in the states table? We'll use a semi join!  ![img](images/02_31.png)
+- Anti join: returns records in the first table where col1 does NOT find a match in col2.
+![img](images/02_32.png) ![img](images/02_33.png)
+- subquery inside WHERE, SELECT, FROM
+  ![img](images/02_34.png)
 
 ## Project: Analyzing Students' Mental Health
 
