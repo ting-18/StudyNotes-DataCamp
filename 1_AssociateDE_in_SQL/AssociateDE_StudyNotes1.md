@@ -1,3 +1,5 @@
+[Next Study Notes](AssociateDE_StudyNotes2.md)
+
 ### Table of contents
 
 - [Understanding Data Engineering](#understanding-data-engineering)
@@ -9,14 +11,14 @@
    - Intermediate SQL
    - Joining Data in SQL
    - Project: Analyzing Students' Mental Health
-- [Database](#database)
+- [Database](AssociateDE_StudyNotes2.md)
    - Introduction to Relational Database in SQL
    - Database Design
-- [Data Warehousing](#data-warehousing)
+- [Data Warehousing]
    - Data Warehousing Concepts
    - Introduction to Snowflakes
-- [Underdtanding Data Visualization](#underdtanding-data-visualization)
-- [Project: Exploring London's Travel Network](#project-exploring-londons-travel-network)
+- [Underdtanding Data Visualization]
+- [Project: Exploring London's Travel Network]
 - Tutorial: How to Install PostgreSQL
 
 
