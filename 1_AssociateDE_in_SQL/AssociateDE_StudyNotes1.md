@@ -10,7 +10,7 @@
    - [Introduction to SQL](#introdiction-tosql)
    - Intermediate SQL
    - Joining Data in SQL
-   - Project: Analyzing Students' Mental Health
+   - MiniProject: Analyzing Students' Mental Health
 - [Database](AssociateDE_StudyNotes2.md)
    - Introduction to Relational Database in SQL
    - Database Design
@@ -280,14 +280,3 @@ A new way of joining data: set operators(UNION, UNION ALL, INTERSECT, EXCEPT). T
 - subquery inside WHERE, SELECT, FROM
   ![img](images/02_34.png)
 
-## Project: Analyzing Students' Mental Health
-
-# Database
-## Introduction to Relational Database in SQL
-## Database Design
-# Data Warehousing
-
-## Data Warehousing Concepts
-# Underdtanding Data Visualization
-# Project: Exploring London's Travel Network
-# Tutorial: How to Install PostgreSQL
