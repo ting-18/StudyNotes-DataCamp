@@ -174,8 +174,41 @@ As we've seen, tables are organized into rows and columns; in the world of datab
 ![img](images/02_05.png)
 
 ## Intermediate SQL
+### SQL formatting
 
+- New lines, capitalization, and indentation are not required in SQL as they sometimes are in other programming languages, but the lack of formatting makes the code difficult to read, especially as queries become more complex. [Holywell's style guide](https://www.sqlstyle.guide)
+- semicolon is unnecessary in PostgreSQL; However, including a semicolon at the end of the query is considered best practice.
+- ![deal with non-standard field names](images/02_06.png)
 
+### Filtering
+- WHERE with strings (use single-quotes around strings)
+- the order of execution will now be FROM, WHERE, SELECT, LIMIT.
+- ![img](images/02_07.png) It's important to remember that BETWEEN is inclusive, meaning the results contain the beginning and end values.
+
+We use a wildcard as a placeholder for some other values to accomplish this. 
+- LIKE There are two wildcards with LIKE, the percent, and the underscore. The percent wildcard will match zero, one, or many characters in the text. The underscore wildcard will match a single character
+- NOT LIKE : We can also use the NOT LIKE operator to find records that don't match the specified pattern.  e.g. WHERE name NOT LIKE 'A.%';
+    - e.g. Find all name end with r : WHERE name LIKE '%r';
+    - e.g. Find all name with third charater of t: WHERE name LIKE '__t%'
+- IN
+- IS NULL,   IS NOT NULL,  COUNT() only coount non-missing values
+### Summarizing data (Aggregate functions)
+- AVG(), SUM() --> Numerical fields only!
+- MIN(). MAX(), COUNT()   --> various data type
+    - All query results are aliased automatically 
+- WHERE + aggregate functions : Bcz SELECT executed after WHERE
+- ROUND():
+    - ROUND() to a whole number: ROUND(AVG(field_name)), ROUND(AVG(field_name),0)
+    - ROUND() to the left of the decimal point. e.g. round to the hundred thousand or five places to the left: ROUNT(AVG(filed_name), -5) -->4100000
+### Arithmetic (+ - * /)
+- aggregate functions, like SUM, perform their operations on the fields vertically while arithmetic adds up the records horizontally. ![img](images/02_08.png)
+### Grouping data
+-  GROUP BY is commonly used with aggregate functions to provide summary statistics, particularly when only grouping a single field, certification, and selecting multiple fields, certification and title.
+-  ORDER BY is always written after GROUP BY, and notice that we can refer back to the alias within the query. That is because of the order of execution.  FROM, GROUP BY, SELECT, ORDER BY, LIMIT
+### Filtering grouped data -filter aggregate functions with HAVING
+- order of execution: FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY, LIMIT.
+    - we cannot use the alias with HAVING, but we can with ORDER BY.
+- WHERE filters individual records while HAVING filters grouped records.  
 
 ## Joining Data in SQL
 ![img](images/02_21.png)
