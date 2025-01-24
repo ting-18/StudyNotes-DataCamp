@@ -1,4 +1,4 @@
-[Next Study Notes](AssociateDE_StudyNotes2.md)
+[_Next StudyNotes_](AssociateDE_StudyNotes2.md)
 
 ### Table of contents
 
