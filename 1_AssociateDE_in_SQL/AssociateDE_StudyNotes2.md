@@ -1,15 +1,7 @@
+[_Previous StudyNotes](AssociateDE_StudyNotes1.md)
 
-### Table of contents
+### Table of contents - PART II
 
-- [Understanding Data Engineering](#understanding-data-engineering)
-  - [What is data engineering](#what-is-data-engineering)
-  - [Storing data](#storing-data)
-  - [Moving and processing data](#moving-and-processing-data)
-- [SQL](#sql)
-   - [Introduction to SQL](#introdiction-tosql)
-   - Intermediate SQL
-   - Joining Data in SQL
-   - Project: Analyzing Students' Mental Health
 - [Database](#database)
    - Introduction to Relational Database in SQL
    - Database Design
