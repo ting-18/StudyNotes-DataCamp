@@ -196,8 +196,6 @@ Practice:
 ![img-e.g.](03_14.png)
 ![img-e.g.](03_15.png)
 
-
-
 ### 3. Uniquely identify records with key constraints (primary/foreign key)
 #### Keys and superkeys
 
