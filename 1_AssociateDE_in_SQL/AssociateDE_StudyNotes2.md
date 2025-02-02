@@ -125,11 +125,7 @@ One advantage of splitting up "university_professors" into several tables is the
   VALUES ("value_a", "value_b");
   ```
 
-### 2. Enforce data consistency with attribute constraints
-After building a simple database, it's now time to make use of the features. You'll specify data types in columns, enforce column uniqueness, and disallow NULL values in this chapter.
-Three concepts that help preserve data quality in databases: __constraints, keys, and referential integrity__. (use constraints, keys and referential integrity in order to assure data quality.)
-
-#### Better data quality with constraints(idea of database and rules)
+### 2. Better data quality with constraints(idea of database and rules)
 __the idea of a database__ is to push data into a certain structure – a pre-defined model, where you enforce data types, relationships, and other rules. Generally, these rules are called __integrity constraints__, although different names exist.
 ![img](images/03_07.png)  (enforce a database constraint)
 - attribute constraints: e.g., a certain attribute, represented through a database column, could have the integer data type, allowing only for integers to be stored in this column.
@@ -138,7 +134,10 @@ __the idea of a database__ is to push data into a certain structure – a pre-de
   
 ![img](images/03_08.png)
 - So constraints give you consistency, meaning that a row in a certain table has exactly the same form as the next row, and so forth.
-  
+
+#### 2.1 Enforce data consistency with attribute constraints (data types)
+After building a simple database, it's now time to make use of the features. You'll specify data types in columns, enforce column uniqueness, and disallow NULL values in this chapter.
+Three concepts that help preserve data quality in databases: __constraints, keys, and referential integrity__. (use constraints, keys and referential integrity in order to assure data quality.)
 ![img](images/03_09.png)
 data types in PostgreSQL. 
    - basic data types for numbers, such as "bigint"
@@ -162,7 +161,7 @@ Practice:
          VALUES ('2018-09-24', 5454, '30');  
          ```
 
-#### Working with data types
+##### Working with data types (--Attribute Constraints)
 - Data types
      - Enforced on columns(i.e. attributes: data types are attribute constraints and are therefore implemented for single columns of a table.)
      - Define the so-called "domain" of a column.
@@ -192,23 +191,85 @@ Practice:
        ```
        ![img](images/03_13.png)
 
-#### two special attribute constraints: The not-null and unique constraints
+##### two special attribute constraints: The not-null and unique constraints
 ![img-e.g.](images/03_14.png)
 ![img-e.g.](images/03_15.png)
 
-### 3. Uniquely identify records with key constraints (primary/foreign key)
-#### Keys and superkeys
-
-#### Primary keys
-
-#### Surrogate keys
+Attribute constraints didn't actually change the structure of the mode.
+#### 2.2. Uniquely identify records with key constraints (primary/foreign key)
 
 
+In the entity-relationship diagram, keys are denoted by underlined attribute names. Notice that you'll add a whole new attribute to the "professors" table, and you'll modify existing columns of the "organizations" and "universities" tables.
+##### Keys and superkeys
+- what is key? what is superkey? what is candidate key?
+     - ![img](images/03_16.png)
+          - Typically a database table has an attribute, or a combination of multiple attributes, whose values are unique across the whole table. Such attributes identify a record uniquely. Normally, a table, as a whole, only contains unique records, meaning that the combination of all attributes is a key in itself. However, __it's called a superkey if attributes from that combination can be removed, and the attributes still uniquely identify records.__
+          - __If all possible attributes have been removed but the records are still uniquely identifiable by the remaining attributes, we speak of a minimal superkey, which is the actual _key_. So a key is always minimal.__
+     - e.g. ![img](images/03_17.png)
+          - __the combination of all attributes is a superkey.__ (If we remove the "year" attribute from the superkey, the six records are still unique, so it's still a superkey. ) Actually, __there are a lot of possible superkeys in this example.__
+          - ![img](images/03_18.png) Remember that superkeys are minimal if no attributes can be removed without losing the uniqueness property. This is trivial for K1 to 3, as they only consist of a single attribute.
+          - These four minimal superkeys are also called __candidate keys__.(why?-next video)
+
+- Practice: Identify keys: Your database doesn't have any defined keys so far, and you don't know which columns or combinations of columns are suited as keys. There's a simple way of finding out whether __a certain column (or a combination)__ contains only unique values – and thus identifies the records in the table.
+     - ```
+       SELECT COUNT(DISTINCT(column_a, column_b, ...)) FROM table;
+       ```
+
+##### Primary keys
+- What is Primary key?
+     - ![img](images/03_19.png)
+     - time-invariant, meaning that they must hold for the current data in the table – but also for any future data that the table might hold.
+- Adding/specifying primary key upon table creation
+     - ![img](images/03_20.png)
+     - these two tables at the left accept exactly the same data, however, the latter has an explicit primary key specified.
+     - you can designate more than one column(the combination of columns) as the primary key(see right in pic). Ideally, though, primary keys consist of as few columns as possible!
+- Adding primary key constraints to existing tables.(you have to give the constraint a certain name)
+     ```
+     ALTER TABLE table_name
+     ADD CONSTRAINT new_column_name PRIMARY KEY (column_name);
+     ```
+##### Surrogate keys
+- What is surrogate key?
+   Surrogate keys are sort of an artificial primary key. In other words, they are not based on a native column in your data, but on a column that just exists for the sake of having a primary key. 
+- Why do we need surrogate key?
+     - Primary keys should be built from a few columns as possible
+     - Primary keys should never change over time.
+     - If you can't find a good cadidate key as the primary key for an existing table(OR the existing attributes are not really suited as primary key), you can define an artificial primary key, ideally consisting of a unique number or string, which stays the same for each record. Other attributes might change, but the primary key always has the same value for a given record.  
+- Adding a surrogate key with __serial__ data type: a special data type in PostgreSQL that allows the addition of auto-incrementing numbers to an existing table. Once you add a column with the "serial" type, all the records in your table will be numbered. Whenever you add a new record(don't provide value for surrogate key) to the table, it will automatically get a number that does not exist yet. 
+     ```
+     ALTER TABLE cars
+     ADD COLUMN id serial PRIMARY KEY
+     INSERT INTO cars
+     VALUES('Volk', 'Blitz', 'black');
+     ```
+- Another strategy for creating a surrogate key: combine two existing columns into a new one.  
+     - we first add a new column with the "varchar" data type. We then "UPDATE" that column with the concatenation of two existing columns. The "CONCAT" function glues together the values of two or more existing columns. Lastly, we turn that new column into a surrogate primary key.
+       ```
+       ALTER TABLE table_name
+       ADD COLUMN column_c varchar(256);
+       UPDATE table_name
+       SET column_c = CONCAT(column_a, column_b);
+       ALTER TABLE table_name
+       ADD CONSTRAINT pk PRIMARY KEY(column_c);
+       ```
+
+ 
+ 
+ 
+ 
+ ![img](images/03_21.png)
+
+- 
 
 
 
 
-### 4. Glue together tables with foreign keys
+You will add a special type of primary key, a so-called __surrogate key__, to the table "professors" in the last part of this chapter.
+
+
+
+
+#### 2.3. Glue together tables with foreign keys
 
 
 
