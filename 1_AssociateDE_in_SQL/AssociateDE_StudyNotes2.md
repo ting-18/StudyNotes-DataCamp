@@ -1,4 +1,4 @@
-[_Previous StudyNotes_](AssociateDE_StudyNotes1.md)
+[_Previous (AssociateDE_StudyNotes1)_](AssociateDE_StudyNotes1.md)
 # Associate Data Engineering in SQL - PART II
 ### Table of contents - PART II
 
