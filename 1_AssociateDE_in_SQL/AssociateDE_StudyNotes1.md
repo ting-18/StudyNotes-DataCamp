@@ -7,7 +7,7 @@
   - [Storing data](#storing-data)
   - [Moving and processing data](#moving-and-processing-data)
 - [SQL](#sql)
-   - [Introduction to SQL](#introdiction-to-sql)
+   - [Introduction to SQL](#introduction-to-sql)
    - Intermediate SQL
    - Joining Data in SQL
    - MiniProject: Analyzing Students' Mental Health
