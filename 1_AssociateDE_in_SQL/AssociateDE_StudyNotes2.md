@@ -13,8 +13,6 @@
 - Tutorial: How to Install PostgreSQL
 
 
-
-
 # Database
 
 ## Introduction to Relational Database in SQL
@@ -230,7 +228,7 @@ In the entity-relationship diagram, keys are denoted by underlined attribute nam
      ```
 ##### Surrogate keys
 - What is surrogate key?
-   Surrogate keys are sort of an artificial primary key. In other words, they are not based on a native column in your data, but on a column that just exists for the sake of having a primary key. 
+   Surrogate keys are sort of __an artificial primary key__. In other words, they are not based on a native column in your data, but on a column that just exists for the sake of having a primary key. 
 - Why do we need surrogate key?
      - Primary keys should be built from a few columns as possible
      - Primary keys should never change over time.
@@ -252,29 +250,88 @@ In the entity-relationship diagram, keys are denoted by underlined attribute nam
        ALTER TABLE table_name
        ADD CONSTRAINT pk PRIMARY KEY(column_c);
        ```
-
- 
- 
- 
- 
- ![img](images/03_21.png)
-
-- 
-
-
-
-
-You will add a special type of primary key, a so-called __surrogate key__, to the table "professors" in the last part of this chapter.
-
-
-
-
 #### 2.3. Glue together tables with foreign keys
+In the final chapter, you'll leverage foreign keys to connect tables and establish relationships that will greatly benefit your data quality. And you'll run __ad hoc analyses__ on your new database.
+##### Model 1:N relationships with foreign keys
+- model a so-called relationship type between "professors" and "universities". 
+     -  ![img](images/03_21.png)
+     -  In the ER diagram, this is drawn with a rhombus. The small numbers specify the cardinality of the relationship: a professor works for at most one university, while a university can have any number of professors working for it – even zero.
+- Implement relationships with foreign keys
+     - __A foreign key(FK) points to the primary key(PK) of another table__ (i.e What is foreign key?    Foreign keys are designated columns that point to a primary key of another table.)
+     - __Domain of FK must be equal to domain of PK.__ (One of three restrictions for foreign keys: the domain and the data type must be the same as one of the primary key)
+     - __Each value of FK must exist in PK of the other table(FK constraint or "referential integrity").__ (One of three restrictions for foreign keys: only foreign key values are allowed that exist as values in the primary key of the referenced table. This is the actual foreign key constraint, also called "referential integrity".)
+     - __FKs are not actual keys.__ (One of three restrictions for foreign keys: a foreign key is not necessarily an actual key, because duplicates and "NULL" values are allowed. )
+- Specifying foreign keys - when creating new tables
+     -  ![img](images/03_22.png)
+     -  As each car is produced by a certain manufacturer, it makes sense to also add a foreign key to this table. We do that by writing the "REFERENCES" keyword, followed by the referenced table and its primary key in brackets. From now on, only cars with valid and existing manufacturers may be entered into that table. Trying to enter models with manufacturers that are not yet stored in the "manufacturers" table won't be possible, thanks to the foreign key constraint.
+- Specifying foreign keys - adding foreign keys to existing tables
+      ```
+       ALTER Table a
+       ADD CONSTRAINT a_fkey FOREIGN KEY (b_id) REFERENCES b (id);
+       ```
+     - Pay attention to the __naming convention__ employed here: Usually, a foreign key referencing another primary key with name id is named x_id, where x is the name of the referencing table in the singular form.
+
+- Practice:
+     - WHEN insert a foreign key value that doesn't exist in reference table, ERROR: insert or update on table "professors" violates foreign key constraint "professors_fkey" .    DETAIL:  Key (university_id)=(MIT) is not present in table "universities".
+  
+##### Model more complex relationships
+- relationship between organizations and professors: an N:M relationship.
+     - ![img](images/03_23.png)  ![img](images/03_24.png)
+     -  a professor can be affiliated with more than one organization and vice versa. Also, this an N:M relationship has an own attribute, the function. Remember that each affiliation comes with a function, for instance, "chairman". The second thing you'll notice is that the affiliations entity type disappeared altogether. For clarity, I still included it in the diagram, but it's no longer needed. However, you'll still have four tables: Three for the entities "professors", "universities" and "organizations", and one for the N:M-relationship between "professors" and "organizations".
+
+- Implement N:M-relationships
+     - ![img](images/03_25.png)
+     - Two foreign keys: one pointing to the "professors.id" column, and one pointing to the "organizations.id" column.
+     - additional attributes, in this case "function", need to be included.
+     - Code shown in above pic of creating that relationship table from scratch. Note that "professor_id" is stored as "integer", as the primary key it refers to has the type "serial", which is also an integer. On the other hand, "organization_id" has "varchar(256)" as type, conforming to the primary key in the "organizations" table.
+     - One last thing: Notice that no primary key is defined here because a professor can theoretically have multiple functions in one organization. One could define the combination of all three attributes as the primary key in order to have some form of unique constraint in that table, but that would be a bit over the top.
+
+- Migrate data: Since you already have a pre-populated affiliations table, things are not going to be so straightforward. You'll need to link and migrate the data to a new table to implement this relationship.
+     - You're going to transform the affiliations table in-place, i.e., without creating a temporary table to cache your intermediate results.
+       ```
+       -- Add a professor_id column
+       ALTER TABLE affiliations
+       ADD COLUMN professor_id integer REFERENCES professors (id);
+
+       -- Rename the organization column to organization_id
+       ALTER TABLE affiliations
+       RENAME COLUMN organization TO organization_id;
+       
+       -- Add a foreign key on organization_id so that it references the id column in organizations
+       ALTER TABLE affiliations
+       ADD CONSTRAINT affiliations_organization_fkey FOREIGN KEY (organization_id) REFERENCES organizations (id);
+       ```
+     - So far, professor_id in table affiliations is null. __Update the professor_id column with the corresponding value of the id column in professors.__ "Corresponding" means rows in professors where the firstname and lastname are identical to the ones in affiliations.
+       ```
+       -- Set professor_id to professors.id where firstname, lastname correspond to rows in professors
+       UPDATE affiliations
+       SET professor_id = professors.id
+       FROM professors
+       WHERE affiliations.firstname = professors.firstname AND affiliations.lastname = professors.lastname;       
+       ```
+     - Drop firstname, lastname columns from the affiliations table
+       ```
+       -- Drop the firstname column
+       ALTER TABLE affiliations
+       DROP COLUMN firstname;
+       -- Drop the lastname column
+       ALTER TABLE affiliations
+       DROP COLUMN lastname;
+       ```
+ 
+##### Referential integrity
 
 
 
 
 
+
+
+##### Roundup
+
+
+
+ ![img](images/03_24.png)
 
 
 
