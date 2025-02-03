@@ -1,4 +1,4 @@
-[_Next - AssociateDE_StudyNotes2](AssociateDE_StudyNotes2.md)
+[Next - AssociateDE_StudyNotes2](AssociateDE_StudyNotes2.md)
 
 ### Table of contents
 
@@ -7,7 +7,7 @@
   - [Storing data](#storing-data)
   - [Moving and processing data](#moving-and-processing-data)
 - [SQL](#sql)
-   - [Introduction to SQL](#introdiction-tosql)
+   - [Introduction to SQL](#introdiction-to-sql)
    - Intermediate SQL
    - Joining Data in SQL
    - MiniProject: Analyzing Students' Mental Health
