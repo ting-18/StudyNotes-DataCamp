@@ -320,18 +320,59 @@ In the final chapter, you'll leverage foreign keys to connect tables and establi
        ```
  
 ##### Referential integrity
+- What is referential integrity?
+     - states that __a record referencing another record in another table must always refer to an existing record.__ In other words: A record in table A cannot point to a record in table B that does not exist.
+     - Referential integrity is a constraint that __always concerns two tables__,
+     - and is __enforced through foreign keys__ 
+     - e.g. if you define a foreign key in the table "professors" referencing the table "universities", referential integrity is held from "professors" to "universities".
+
+- Referential integrity violations (two ways).
+     - __if a record in table B that is referenced from a record in table A is deleted.__
+     - __if a record in table A referencing a non-existing record from table B is inserted.__
+     - Referential integrity from table A to table B will be violated. And __Foreign keys prevent violations__- they will __throw errors__ and stop you from accidentally doing these things.
+
+- How to deal with violations?  
+     - throwing an error is not the only option. If you specify a foreign key on a column, you can actually tell the database system what should happen if an entry in the referenced table is deleted.
+     - __By default, the "ON DELETE NO ACTION" keyword is automatically appended to a foreign key definition__, like in the example here. This means that if you try to delete a record in table B which is referenced from table A, the system will throw an error. However, there are other options.
+     - __there's the "CASCADE" option__, which will ___first allow the deletion of the record in table B, and then will automatically delete all referencing records in table A.___ So that deletion is cascaded.
+     -  ![img](images/03_26.png)
+     -  More options:
+          - ![img](images/03_27.png)         - 
+          - __The "RESTRICT" option is almost identical to the "NO ACTION" option.__ The differences are technical and beyond the scope of this course.
+          - More interesting is __the "SET NULL" option__. It will set the value of the foreign key for this record to "NULL".
+          - __The "SET DEFAULT" option__ only works if you have specified a default value for a column. It automatically changes the referencing column to a certain default value if the referenced record is deleted. Setting default values is also beyond the scope of this course, but this option is still good to know.
+            
+- Practice: Change the referential integrity behavior of a key.
+     - story: So far, you implemented three foreign key constraints:
+       **** SET professors.university_id = universities.id ****
+       **** SET affiliations.organization_id = organizations.id ****
+       **** SET affiliations.professor_id = professors.id ****
+       These foreign keys currently have the behavior ON DELETE NO ACTION. Here, you're going to change that behavior for the column referencing organizations from affiliations --> If an organization is deleted, all its affiliations (by any professor) should also be deleted.
+     - How to alter a key constraint: DROP the key constraint and then ADD a new one with a different ON DELETE behavior.
+     ```
+     -- Have a look at the existing foreign key constraints by querying table_constraints in information_schema
+     SELECT constraint_name, table_name, constraint_type
+     FROM information_schema.table_constraints
+     WHERE constraint_type = 'FOREIGN KEY';
+
+     -- Drop the right foreign key constraint
+     ALTER TABLE affiliations
+     DROP CONSTRAINT affiliations_organization_id_fkey;
+
+     -- Add a new foreign key constraint from affiliations to organizations which cascades deletion
+     ALTER TABLE affiliations
+     ADD CONSTRAINT affiliations_organization_id_fkey FOREIGN KEY (organization_id) REFERENCES organizations (id) ON DELETE CASCADE;         
+     ```
+##### Roundup (Review And ad-hoc analysis)
+- Review: Transform a table(flat files like CSVs or excel files) into the database schema-only by executing SQL queries:
+     - Define column data types
+     - Key constraints (add primary/foreign keys, specify relationships between tables)
+
+- The DBMS exposes a query interface where you can run ad-hoc analyses and queries with SQL. However, you can also access this interface through other client applications. You could, for example, program a Python script that connects to the database, loads data from it, and visualizes it.  ![img](images/03_28.png)
+  
+- After this, you'll no longer manipulate data in your database system, but employ some analysis queries on your database.
 
 
-
-
-
-
-
-##### Roundup
-
-
-
- ![img](images/03_24.png)
 
 
 
@@ -341,6 +382,10 @@ In the final chapter, you'll leverage foreign keys to connect tables and establi
 
 ## Database Design
 # Data Warehousing
+
+ ![img](images/03_29.png)
+
+ 
 
 ## Data Warehousing Concepts
 # Understanding Data Visualization
