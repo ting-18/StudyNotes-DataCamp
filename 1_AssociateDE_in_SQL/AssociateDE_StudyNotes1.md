@@ -1,4 +1,4 @@
-[Next - AssociateDE_StudyNotes2](AssociateDE_StudyNotes2.md)
+[_Next - AssociateDE_StudyNotes2_](AssociateDE_StudyNotes2.md)
 
 ### Table of contents
 
