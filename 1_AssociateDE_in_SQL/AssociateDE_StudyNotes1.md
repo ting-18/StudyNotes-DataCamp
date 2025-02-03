@@ -1,4 +1,4 @@
-[_Next StudyNotes_](AssociateDE_StudyNotes2.md)
+[_Next - AssociateDE_StudyNotes2](AssociateDE_StudyNotes2.md)
 
 ### Table of contents
 
@@ -11,7 +11,7 @@
    - Intermediate SQL
    - Joining Data in SQL
    - MiniProject: Analyzing Students' Mental Health
-- [Database](AssociateDE_StudyNotes2.md)
+- [Database (AssociateDE_StudyNotes2)](AssociateDE_StudyNotes2.md)
    - Introduction to Relational Database in SQL
    - Database Design
 - [Data Warehousing]
