@@ -2,8 +2,8 @@
 [_Previous (AssociateDE_StudyNotes2)_](#AssociateDE_StudyNotes2.md)
 
 # Associate Data Engineering in SQL - PART III
-### Table of contents - PART III
 
+### Table of contents - PART III
 
 - [Data Warehousing](#data-warehousing)
    - [Data Warehousing Concepts](#data-warehousing-concepts)
@@ -18,3 +18,11 @@
 ## Data Warehousing Concepts
 
 ## Introduction to Snowflakes
+
+
+
+
+
+# Understanding Data Visualization
+## Project: Exploring London's Travel Network
+# Tutorial: How to Install PostgreSQL
