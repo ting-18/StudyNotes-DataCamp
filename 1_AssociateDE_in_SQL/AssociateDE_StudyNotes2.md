@@ -6,7 +6,7 @@
 
 - [Database](#database)
    - [Introduction to Relational Database in SQL](#introduction-to-relational-database-in-sql)
-        - [1.Your first database](### 1.-your-first-database)
+        - [1.Your first database](#1.your-first-database)
    - Database Design
 - [Data Warehousing](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
