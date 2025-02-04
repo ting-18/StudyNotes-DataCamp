@@ -14,7 +14,7 @@
 - [Database (AssociateDE_StudyNotes2)](AssociateDE_StudyNotes2.md)
    - Introduction to Relational Database in SQL
    - Database Design
-- [Data Warehousing]
+- [Data Warehousing](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
    - Introduction to Snowflakes
 - [Underdtanding Data Visualization]
