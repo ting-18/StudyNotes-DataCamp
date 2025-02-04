@@ -1,11 +1,13 @@
-[_Previous (AssociateDE_StudyNotes1)_](AssociateDE_StudyNotes1.md)
+[_Previous (AssociateDE_StudyNotes1)_](AssociateDE_StudyNotes1.md) \
+[_Next (AssociateDE_StudyNotes3)_](AssociateDE_StudyNotes3.md)
+
 # Associate Data Engineering in SQL - PART II
 ### Table of contents - PART II
 
 - [Database](#database)
    - Introduction to Relational Database in SQL
    - Database Design
-- [Data Warehousing](#data-warehousing)
+- [Data Warehousing](#AssociateDE_StudyNotes3.md)- 
    - Data Warehousing Concepts
    - Introduction to Snowflakes
 - [Understanding Data Visualization](#undersdanding-data-visualization)
@@ -372,22 +374,11 @@ In the final chapter, you'll leverage foreign keys to connect tables and establi
   
 - After this, you'll no longer manipulate data in your database system, but employ some analysis queries on your database.
 
-
-
-
-
-
-
-
-
 ## Database Design
-# Data Warehousing
+
 
  ![img](images/03_29.png)
 
  
 
-## Data Warehousing Concepts
-# Understanding Data Visualization
-## Project: Exploring London's Travel Network
-# Tutorial: How to Install PostgreSQL
+
