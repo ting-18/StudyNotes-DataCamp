@@ -6,7 +6,8 @@
 
 - [Database](#database)
    - [Introduction to Relational Database in SQL](#introduction-to-relational-database-in-sql)
-        - [1.Your first database](#your-first-database)
+        - [1.Your first database](#1-your-first-database)
+        - [2.Better data quality with constraints](#2-better-data-quality-with-constraints)
    - Database Design
 - [Data Warehousing](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
