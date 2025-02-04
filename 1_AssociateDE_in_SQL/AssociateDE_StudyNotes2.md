@@ -6,8 +6,9 @@
 
 - [Database](#database)
    - Introduction to Relational Database in SQL
+        - [1.Your first database](#1.-your-first-database)
    - Database Design
-- [Data Warehousing](#AssociateDE_StudyNotes3.md)- 
+- [Data Warehousing](#AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
    - Introduction to Snowflakes
 - [Understanding Data Visualization](#undersdanding-data-visualization)
