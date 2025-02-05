@@ -486,14 +486,28 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
      - Extending the book dimension(??): ![img](images/03_54.png)
             
 #### Normalized and denormalized databases
-
-
-
-
-
-
-
-
+- example: star schema with denormalized dimension tables, snowflake schema with normalized dimension tables. The normalized database looks way more complicated. And it is in some ways.
+     - For example, let's say you wanted to get the quantity of all books by Octavia E. Butler sold in Vancouver in Q4 of 2018.
+       Query based on star schema: 3 jions. ![img](images/03_55.png) \
+       Query based on snaowflakes schema: 8 jions.  ![img](images/03_56.png)   ![img](images/03_57.png) \
+       The normalized snowflake schema has considerably more tables. This means more joins, which means slower queries. 
+- Why would we want to normalize a database? 
+        ![img](images/03_59.png) 
+     - __Normalization saves space__
+       Denormalized databases enable __data redundancy__ (It has a lot of repeated information). Normalization eliminates data redundancy. 
+     - __Normalization ensures better data integrity.__
+       ![img](images/03_58.png)  \
+       First, it enforces __data consistency__. Data entry can get messy, and at times people will fill out fields differently. For example, when referring to California, someone might enter the initials "CA". __Since the states are already entered in a table, we can ensure naming conventions through referential integrity.__
+       Secondly, because duplicates are reduced, __modification of any data becomes safer and simpler__. Say in the previous example, you wanted to update the spelling of a state - you wouldn't have to find each record referring to the state, instead, you could make that change in the states table by altering one record. From there, you can be confident that the new spelling will be enacted for all stores in that state.
+       Lastly, since tables are smaller and organized more by object, __its easier to alter the database schema.__ You can extend a smaller table without having to alter a larger table holding all the vital data.
+- Advantages and disadvantages of database normalization:
+     - ![img](images/03_59.png)
+       Now normalization seems appealing, especially for database maintenance. However, normalization requires a lot more joins making queries more complicated, which can make indexing and reading of data slower.
+       Deciding between normalization and denormalization comes down to __how read- or write- intensive your database is going to be__.
+     - OLTP vs OLAP:
+       ![img](images/03_60.png) \
+       OLTP is write-intensive meaning we're updating and writing often. Normalization makes sense because we want to add data quickly and consistently.
+       OLAP is read-intensive because we're running analytics on the data. This means we want to prioritize quicker read queries. 
 
 #### Normal forms
 
