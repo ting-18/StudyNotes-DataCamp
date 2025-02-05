@@ -398,10 +398,55 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
 #### Storing data
 - Data can be stored in three different levels: Structured data(SQL, tables in a relational database), Unstructured data(photos, chat logs, MP3), Semi-structured data(NoSQL, XML, JSON). \
   The semi-structured data does not follow a larger schema, rather it has an ad-hoc self-describing structure.
-- Databases:
-![img](images/03_32.png) \
-    We use the term "traditional databases" because many people consider data warehouses and lakes to be a type of database
-
+- Databases: Traditional database(operational database, used for OLTP), Data warehouse(OLAP), Data lake.
+     - ![img](images/03_32.png) \
+       We use the term "traditional databases" because many people consider data warehouses and lakes to be a type of database
+     - ![img](images/03_33.png) \
+       Data warehouses are optimized for __read-only__ analytics. In their database design, they typically use dimensional modeling and a denormalized schema. \
+       Amazon, Google, and Microsoft all offer data warehouse solutions, known as Redshift, Big Query, and Azure SQL Data Warehouse, respectively. \
+       A data mart is a subset of a data warehouse dedicated to a specific topic. Data marts allow departments to have easier access to the data that matters to them.  
+     - Data Lakes
+       ![img](images/03_34.png) \
+       why lower cost in data lakes? Data Lake storage is cheaper because it uses object storage as opposed to the traditional block or file storage. This allows massive amounts of data to be stored effectively of all types, from streaming data to operational databases. \
+       Lakes are massive because they store all the data that might be used. Data lakes are often petabytes in size - that's 1,000 terabytes! Unstructured data is the most scalable, which permits this size. \
+       __Lakes are schema-on-read__, meaning the schema is created as data is read. __Warehouses and traditional databases are classified as schema-on-write__ because the schema is predefined. \
+       Data lakes have to be organized and cataloged well; otherwise, it becomes an aptly named "data swamp." Data lakes aren't only limited to storage. It's becoming popular to run analytics on data lakes. This is especially true for tasks like deep learning and data discovery, which needs a lot of data that doesn't need to be that "clean." \
+- Two different approaches for describing data flow: ETL and ELT
+     - ![img](images/03_35.png) 
+     - ETL is the more traditional approach for warehousing and smaller-scale analytics. In ETL, data is transformed before loading into storage - usually to follow the storage's schema, as is the case with warehouses.
+     - ELT has become common with big data projects. __In ELT, the data is stored in its native form__ in a storage solution like a data lake. __Portions of data are transformed for different purposes, from building a data warehouse to doing deep learning.__
+#### Database design
+- What is database design?
+     - ![img](images/03_36.png) \
+       Database design determines how data is logically stored. This is crucial because it affects how the database will be queried, whether for reading data or updating data. \
+       There are two important concepts to know when it comes to database design: Database models and schemas. \
+       Database models are high-level specifications for database structure. The relational model, which is the most popular, is the model used to make relational databases. It defines rows as records and columns as attributes. It calls for rules such as each row having unique keys. There are other models that exist that do not enforce the same rules. \
+       A schema is a database's blueprint. In other words, __the implementation of the database model. It takes the logical structure more granularly by defining the specific tables, fields, relationships, indexes, and views a database will have.__ Schemas must be respected when inserting structured data into a relational database.
+- Data modeling
+     - ![img](images/03_37.png) \
+       The first step to database design is data modeling. This is the abstract design phase, where we define a data model for the data to be stored. \
+       There are three levels to a data model:
+          - A conceptual data model describes what the database contains, such as its entities, relationships, and attributes.
+          - A logical data model decides how these entities and relationships map to tables.
+          - A physical data model looks at how data will be physically stored at the lowest level of abstraction. \
+       These three levels of a data model ensure consistency and provide a plan for implementation and use.
+- An example: where we want to store songs?     
+     - ![img](images/03_38.png) \
+        In this case, the entities are songs, albums, and artists with various pink attributes. Their relationships are denoted by blue rhombuses. Here we have a conceptual idea of the data we want to store. \
+       Here is a corresponding schema using the relational model. The fastest way to create a schema is to translate the entities into tables. But just because it's the easiest, doesn't mean it's the best. \
+     - some other ways this ER diagram could be converted. \
+       ![img](images/03_39.png) \
+       you could opt to have one table because you don't want to have to run so many joins to get song information. \
+       Or, you could add tables for genre and label. Many songs share these attributes, and having one place for them helps with data integrity. \
+       The biggest difference here is how the tables are determined. There are different pros and cons to these three examples I've shown. The next chapter on normalization and denormalization will expand on this.
+- Dimensional modeling (beyond relational model)
+     - ![img](images/03_40.png) \
+       Dimensional modeling is an adaptation of the relational model specifically for data warehouses. It's optimized for OLAP type of queries that aim to analyze rather than update. To do this, it uses the star schema. The schema of a dimensional model tends to be easy to interpret and extend. This is a big plus for analysts working on the warehouse.
+     - ![img](images/03_41.png) \
+       Dimensional models are made up of two types of tables: __fact and dimension tables__.
+       What the fact table holds is decided by the business use-case. It contains records of a key metric, and this metric changes often. Fact tables also hold foreign keys to dimension tables. \
+       Dimension tables hold descriptions of specific attributes and these do not change as often. \
+       So what does that mean? e.g. The turquoise table is a fact table called songs. It contains foreign keys to purple dimension tables. These dimension tables expand on the attributes of a fact table, such as the album it is in and the artist who made it. The records in fact tables often change as new songs get inserted. Albums, labels, artists, and genres will be shared by more than one song - hence records in dimension tables won't change as much. __Summing it up, to decide the fact table in a dimensional model, consider what is being analyzed and how often entities change.__
 
 
 
