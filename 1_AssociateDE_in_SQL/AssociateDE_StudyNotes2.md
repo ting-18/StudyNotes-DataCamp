@@ -468,7 +468,7 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
      - ![img](images/03_46.png) \
        Normalization is a technique that divides tables into smaller tables and connects them via relationships. The goal is to reduce redundancy and increase data integrity.
        So how does this happen? There are several forms of normalization. But __the basic idea is to identify repeating groups of data and create new tables for them__. 
-     - Let's go back to our example and to see how these tables were normalized.
+     - Let's go back to our example and to see how these tables were normalized. __i.e. how to normalize databases to different extents.__
           - book dimension:
             ![img](images/03_47.png)      ![img](images/03_48.png) \
             Here's the book dimension in the star schema. What could be repeating here? Primary keys are inherently unique.
@@ -481,9 +481,19 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
           - Time dimension:
             ![img](images/03_51.png) \
             A day is part of a month that is part of a quarter, and so on!
+- Practice:
+     - Adding foreign keys(???): ![img](images/03_52.png)   ![img](images/03_53.png) 
+     - Extending the book dimension(??): ![img](images/03_54.png)
             
 #### Normalized and denormalized databases
-the importance of normalization and see how to normalize databases to different extents.
+
+
+
+
+
+
+
+
 
 #### Normal forms
 
