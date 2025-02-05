@@ -9,7 +9,7 @@
         - [1.Your first database](#1-your-first-database)
         - [2.Better data quality with constraints](#2-better-data-quality-with-constraintsidea-of-database-and-rules) 
    - [Database Design](#database-design)
-- [Data Warehousing](AssociateDE_StudyNotes3.md)
+- [Data Warehousing (AssociateDE_StudyNotes3)](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
    - Introduction to Snowflakes
 - [Understanding Data Visualization](#undersdanding-data-visualization)
@@ -377,9 +377,47 @@ In the final chapter, you'll leverage foreign keys to connect tables and establi
 - After this, you'll no longer manipulate data in your database system, but employ some analysis queries on your database.
 
 ## Database Design
+A good database design is crucial for a high-performance application. \
+how your data will be stored beforehand. a well-designed database ensures ease of access and retrieval of information. While choosing a design, a lot of considerations have to be accounted for. \
+In this course, you'll learn how to process, store, and organize data in an efficient way. You'll see how to structure data through normalization and present your data with views. Finally, you'll learn how to manage your database and all of this will be done on a variety of datasets from book sales, car rentals, to music reviews.
+
+### Processing, Storing, and Organizing Data
+two approaches to data processing, OLTP and OLAP. the basics of data modeling.
+#### OLTP and OLAP
+- How should we organize and manage data?
+     -  ![img](images/03_29.png)
+     -  we have to consider the different schemas, management options, and objects that make up a database.  These topics all affect the way data is stored and accessed. Some enable faster query speeds. Some take up less memory than others. And notably, some cost more money than others.
+     -  there is no one right answer to this motivating question. It will come down to how the data will be used.
+- Approaches to processing data (OLTP vs OLAP)
+     - They help define the way data is going to flow, be structured, and stored. If you figure out which fits your business case, designing your database will be much easier.
+     - OLTP stands for __Online Transaction Processing__, which is oriented around transactions. application-oriented,like for bookkeeping for example. 
+     - OLAP stands for __Online Analytical Processing__. which is oriented around analytics. are oriented around a certain subject that's under analysis, like last quarter's book sales. 
+     - Use cases: OLTP focus on supporting day-to-day operations, while OLAP tasks are vaguer and focus on business decision making. ![img](images/03_30.png)  ![img](images/03_31.png)  
+- OLTP and OLAP working together
+     - OLTP data is usually stored in an operational database that is pulled and cleaned to create an OLAP data warehouse. Analyses from OLAP systems are used to inform business practices and day-to-day activity, thereby influencing the OLTP databases.
+#### Storing data
 
 
- ![img](images/03_29.png)
+
+
+
+
+
+
+### Database Schemas and Normalization
+
+
+### Database Views
+
+
+### Database Management
+
+
+![img](images/03_29.png)
+
+
+
+
 
  
 
