@@ -464,20 +464,24 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
        The snowflake schema is an extension of the star schema.
        Off the bat, we see that it has more tables. The information contained in this schema is the same as the star schema. In fact, the fact table is the same, but the way the dimension tables are structured is different. 
      - The star schema extends one dimension, while the snowflake schema extends over more than one dimension. This is because the dimension tables are normalized.       
-- What is normalization?
-     - Normalization is a technique that divides tables into smaller tables and connects them via relationships.
+- What is normalization? 
      - ![img](images/03_46.png) \
-     - The goal is to reduce redundancy and increase data integrity. So how does this happen? There are several forms of normalization, which we'll delve into later. But the basic idea is to identify repeating groups of data and create new tables for them. Let's go back to our example and to see how these tables were normalized.
-
-- 
-
-
-
-
-
-
-
-
+       Normalization is a technique that divides tables into smaller tables and connects them via relationships. The goal is to reduce redundancy and increase data integrity.
+       So how does this happen? There are several forms of normalization. But __the basic idea is to identify repeating groups of data and create new tables for them__. 
+     - Let's go back to our example and to see how these tables were normalized.
+          - book dimension:
+            ![img](images/03_47.png)      ![img](images/03_48.png) \
+            Here's the book dimension in the star schema. What could be repeating here? Primary keys are inherently unique.
+            For book titles, although there is possible repeat here, it is not common. On the other hand, authors often publish more than one book, publishers definitely publish many books, and a lot of books share genres.
+            We can create new tables for them, and it results in the following snowflake schema: these repeating groups now have their own table.
+          - Store dimension:
+            ![img](images/03_49.png)     ![img](images/03_50.png)  \
+            store dimension: City, states, and countries can definitely have more than one book stores within them.
+            Notice: the way we structure these repeating groups is a bit different from the book dimension.? An author can have published in different genres and with various publishers, hence why they were different dimensions. However, a city stays in the same state and country; thus, they extend each other over three dimensions.                  
+          - Time dimension:
+            ![img](images/03_51.png) \
+            A day is part of a month that is part of a quarter, and so on!
+            
 #### Normalized and denormalized databases
 the importance of normalization and see how to normalize databases to different extents.
 
