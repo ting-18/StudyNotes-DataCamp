@@ -446,6 +446,7 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
        Dimensional models are made up of two types of tables: __fact and dimension tables__.
        What the fact table holds is decided by the business use-case. It contains records of a key metric, and this metric changes often. Fact tables also hold foreign keys to dimension tables. \
        Dimension tables hold descriptions of specific attributes and these do not change as often. \
+       ![img](images/03_42.png)
        So what does that mean? e.g. The turquoise table is a fact table called songs. It contains foreign keys to purple dimension tables. These dimension tables expand on the attributes of a fact table, such as the album it is in and the artist who made it. The records in fact tables often change as new songs get inserted. Albums, labels, artists, and genres will be shared by more than one song - hence records in dimension tables won't change as much. __Summing it up, to decide the fact table in a dimensional model, consider what is being analyzed and how often entities change.__
 
 
