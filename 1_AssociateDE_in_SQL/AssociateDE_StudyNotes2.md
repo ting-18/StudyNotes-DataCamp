@@ -396,9 +396,11 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
 - OLTP and OLAP working together
      - OLTP data is usually stored in an operational database that is pulled and cleaned to create an OLAP data warehouse. Analyses from OLAP systems are used to inform business practices and day-to-day activity, thereby influencing the OLTP databases.
 #### Storing data
-
-
-
+- Data can be stored in three different levels: Structured data(SQL, tables in a relational database), Unstructured data(photos, chat logs, MP3), Semi-structured data(NoSQL, XML, JSON). \
+  The semi-structured data does not follow a larger schema, rather it has an ad-hoc self-describing structure.
+- Databases:
+![img](images/03_32.png) \
+    We use the term "traditional databases" because many people consider data warehouses and lakes to be a type of database
 
 
 
