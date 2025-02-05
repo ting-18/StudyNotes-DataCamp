@@ -422,7 +422,7 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
        There are two important concepts to know when it comes to database design: Database models and schemas. \
        Database models are high-level specifications for database structure. The relational model, which is the most popular, is the model used to make relational databases. It defines rows as records and columns as attributes. It calls for rules such as each row having unique keys. There are other models that exist that do not enforce the same rules. \
        A schema is a database's blueprint. In other words, __the implementation of the database model. It takes the logical structure more granularly by defining the specific tables, fields, relationships, indexes, and views a database will have.__ Schemas must be respected when inserting structured data into a relational database.
-- Data modeling
+- __Data modeling__
      - ![img](images/03_37.png) \
        The first step to database design is data modeling. This is the abstract design phase, where we define a data model for the data to be stored. \
        There are three levels to a data model:
@@ -439,7 +439,7 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
        you could opt to have one table because you don't want to have to run so many joins to get song information. \
        Or, you could add tables for genre and label. Many songs share these attributes, and having one place for them helps with data integrity. \
        The biggest difference here is how the tables are determined. There are different pros and cons to these three examples I've shown. The next chapter on normalization and denormalization will expand on this.
-- Dimensional modeling (beyond relational model)
+- __Dimensional modeling__ (beyond relational model)
      - ![img](images/03_40.png) \
        Dimensional modeling is an adaptation of the relational model specifically for data warehouses. It's optimized for OLAP type of queries that aim to analyze rather than update. To do this, it uses the star schema. The schema of a dimensional model tends to be easy to interpret and extend. This is a big plus for analysts working on the warehouse.
      - ![img](images/03_41.png) \
@@ -449,10 +449,39 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
        ![img](images/03_42.png) \
        What does that mean? e.g. The turquoise table is a fact table called songs. It contains foreign keys to purple dimension tables. These dimension tables expand on the attributes of a fact table, such as the album it is in and the artist who made it. The records in fact tables often change as new songs get inserted. Albums, labels, artists, and genres will be shared by more than one song - hence records in dimension tables won't change as much. __Summing it up, to decide the fact table in a dimensional model, consider what is being analyzed and how often entities change.__
 
-
-
-
 ### Database Schemas and Normalization
+#### Star and snowflake schema
+- Star schema
+     - ![img](images/03_43.png) \
+       The star schema is the simplest form of the dimensional model. Some use the terms "star schema" and "dimensional model" interchangeably.
+     - e.g. you work for a company that sells books in bulk to bookstores across the US and Canada. You have a database to keep track of book sales. Let's take a look at the star schema for this database. \
+       ![img](images/03_44.png) \       
+       Excluding primary and foreign keys, the fact table holds the _sales amount_ and _quantity_ of books. \
+       It's connected to dimension tables with details on the books sold, the time the sale took place, and the store buying the books. \
+      The lines connecting these tables represent a one-to-many relationship. e.g., a store can be part of many book sales, but one sale can only belong to one store.    
+- Snowflake schema
+     - ![img](images/03_45.png) \
+       The snowflake schema is an extension of the star schema.
+       Off the bat, we see that it has more tables. The information contained in this schema is the same as the star schema. In fact, the fact table is the same, but the way the dimension tables are structured is different. 
+     - The star schema extends one dimension, while the snowflake schema extends over more than one dimension. This is because the dimension tables are normalized.       
+- What is normalization?
+     - Normalization is a technique that divides tables into smaller tables and connects them via relationships.
+     - ![img](images/03_46.png) \
+     - The goal is to reduce redundancy and increase data integrity. So how does this happen? There are several forms of normalization, which we'll delve into later. But the basic idea is to identify repeating groups of data and create new tables for them. Let's go back to our example and to see how these tables were normalized.
+
+- 
+
+
+
+
+
+
+
+
+#### Normalized and denormalized databases
+the importance of normalization and see how to normalize databases to different extents.
+
+#### Normal forms
 
 
 ### Database Views
