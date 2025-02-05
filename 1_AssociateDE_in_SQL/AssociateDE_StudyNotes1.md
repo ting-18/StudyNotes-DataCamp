@@ -26,7 +26,7 @@
 ## What is data engineering
 ### About big data
 - big data is mainly composed of sensors and devices data, social media data, enterprise data and VoIP data.
-![big data growth](images/01_01.png)
+![big data growth](images/01_01.png=X200)
 - __Five Vs of Big Data
 Big data is commonly characterized by five Vs: volume (the quantity of data points), variety (type and nature of the data: text, image, video, audio), velocity (how fast the data is generated and processed), veracity (how trustworthy the sources are), and value (how actionable the data is). Data engineers need to take all of this into consideration.__
 ![five Vs](images/01_02.png)
