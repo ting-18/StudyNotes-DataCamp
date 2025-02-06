@@ -502,15 +502,35 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
        Lastly, since tables are smaller and organized more by object, __its easier to alter the database schema.__ You can extend a smaller table without having to alter a larger table holding all the vital data.
 - Advantages and disadvantages of database normalization:
      - ![img](images/03_59.png)
-       Now normalization seems appealing, especially for database maintenance. However, normalization requires a lot more joins making queries more complicated, which can make indexing and reading of data slower.
+       Now normalization seems appealing, especially for database maintenance (especially for the company's __operational database__). However, normalization requires a lot more joins making queries more complicated, which can make indexing and reading of data slower.
        Deciding between normalization and denormalization comes down to __how read- or write- intensive your database is going to be__.
      - OLTP vs OLAP:
        ![img](images/03_60.png) \
        OLTP is write-intensive meaning we're updating and writing often. Normalization makes sense because we want to add data quickly and consistently.
        OLAP is read-intensive because we're running analytics on the data. This means we want to prioritize quicker read queries. 
+- Practice:  ![img](images/03_61.png)   ![img](images/03_62.png)  \ 
 
 #### Normal forms
-
+- A formal definition of Normalization by Adrienne Watt. ![img](images/03_63.png)
+- __Normal forms__: ![img](images/03_64.png)
+  There are different extents to which you can normalize. These are called normal forms. Below is a list of them from least to most normalized. Each has its own set of rules, and some build on top of each other. 
+- 1NF rules:
+     - Each record must be unique -no duplicate rows.
+     - Each cell must hold one value.
+       e.g. ![img](images/03_65.png)  ![img](images/03_66.png) 
+- 2NF:
+     - ![img](images/03_67.png)    ![img](images/03_68.png)
+     - __A composite primary key is when a primary key is made up of two or more columns. If the table has a composite primary key, then each non-key column must be dependent on all the keys.__
+     - e.g. student and course id as a composite primary key. We then review the other columns and their dependence on these two keys. First is the instructor, which isn't dependent on the student_id - only the course_id. Meaning an instructor solely depends on the course, not the students who take the course. The same goes for the instructor_id column. However, the percent completed is dependent on both the student and the course id. _To convert it, we can create two new tables that satisfy the conditions of 2NF_.
+- 3NF: 
+     - ![img](images/03_69.png)  ![img](images/03_70.png) 
+     - __3NF doesn't allow transitive dependencies. This means that non-primary key columns can't depend on other non-primary key columns.__
+     - e.g. Course_id is the primary key so we can ignore this column. Instructor_id and Instructor definitely depend on each other. Tech does not depend on the instructor as an instructor can teach different technologies. _We can replace the table from before into these two tables to meet 3NF criteria. These tables have no transitive dependencies and they also meet 2NF as there are no composite primary keys._
+- __Data anomalies__
+     - Why would we want to put effort into normalizing a database even more? Why isn't 1NF enough? __A database that isn't normalized enough is prone to three types of anomaly errors: update, insertion, and deletion. The more normalized the database, the less prone it will be to these anomalies. For example, most 3NF tables can't have an update, insertion, and deletion anomalies.__
+     - Update anomaly: is a data inconsistency that can arise when updating a database with redundancy. e.g. when updating a student_email, need to update all of this student's records. 
+     - Insertion anomaly: is when you are unable to add a new record due to missing attributes. e.g. if a student signs up for DataCamp, but doesn't start any courses, they cannot be put into this database. The only exception is if the enrolled_in column can accept nulls. The dependency between columns in the same table unintentionally restricts what can be inserted into the table. (Table: Student_ID, Student_Email, Enrolled_in, Taught_by)
+     - Deletion anomaly: happens when you delete a record and unintentionally delete other data. e.g. if you were to delete any of these students, you would lose the course information provided in the columns enrolled_in and taught_by. This could be resolved if we put that information in another table.
 
 ### Database Views
 
