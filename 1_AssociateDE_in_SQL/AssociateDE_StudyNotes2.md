@@ -533,9 +533,176 @@ two approaches to data processing, OLTP and OLAP. the basics of data modeling.
      - Deletion anomaly: happens when you delete a record and unintentionally delete other data. e.g. if you were to delete any of these students, you would lose the course information provided in the columns enrolled_in and taught_by. This could be resolved if we put that information in another table.
 
 ### Database Views
+learn how to create and query views. On top of that, you'll master more advanced capabilities to manage them and end by identifying the difference between materialized and non-materialized views.
+#### Database views
+- What is Database views?
+     - ![img](images/03_71.png)
+     - views are virtual tables that are not part of the physical schema. __A view isn't stored in physical memory; instead, the query to create the view is.__ The data in a view comes from data in tables of the same database. Once a view is created, you can query it like a regular table. The benefit of a view is that you don't need to retype common queries. It allows you to add virtual tables without altering the database's schema.  
+- views syntax
+     - Create a view
+       ```
+       CREATE VIEW view_name1 AS
+       SELECT col1, col2 FROM table_name;
+       ```
+     - Query a view (same to quering a table)
+       ```
+       SELECT * FROM view_name1
+       ```
+       view_name1 isn't a real table with physical memory. When we run this select statement, the following query is actually being run. ``` SELECT * FROM (SELECT col1, col2 FROM table_name); ``` 
+     - Viewing views (In PostgreSQL, excludes system views)
+       ``` SELECT * FROM INFORMATION_SCHEMA.views
+       WHERE table_schema NOT IN ('pg_catalog', 'information_schema'); ```
+       DBMSs have their own built-in views. The query above excludes views from pg_catalog and information_schema which are built-in view categories.
+       Because views are very useful, it's common to end up with many of them in your database. It's important to keep track of them so that database users know what is available to them. __The skill of getting familiar with viewing views within a database and interpreting their purpose is needed when writing database documentation or organizing views.__
+- benefits of views
+     - __Doesn't take up storage__
+       a view doesn't take up any storage except for the query statement, which is minimal.
+     - __A form of _access control___- Hide sensitive columns and restrict what user can see.
+       Views act as a form of access control. e.g., instead of giving a user access to columns that may have sensitive information, you can restrict what they can see via a view.
+     - __Masks complexity of queries__ - useful for highly normalized schemas
+       views mask the complexity of queries. e.g. the total 8 joins based on snowflake schemas. You can make those common joins - such as aggregating dates or genres - into views. Views are handy for views normalized past the 2NF.
 
+#### Managing views
+- Creating more complex views- be aware of long query execution time.
+     - Aggregation: SUM(), AVG(), COUNT(), MIN(), MAX(), GROUP BY, etc
+     - Joins: INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN
+     - Conditions: WHERE, HAVING, UNIQUE, NOT NULL, AND, OR, >, <, etc
+- Granting and revoking access to a view (access control) - see more details in Chapter 4
+     - ![img](images/03_72.png)
+       e.g. The update privilege on an object called ratings is being granted to public. PUBLIC is a SQL term that encompasses all users. All users can now use the UPDATE command on the ratings object. In the second line, the user db_user will no longer be able to INSERT on the object films.
+       __Syntax and example:__
+       ```
+       GRANT UPDATE ON ratings TO PUBLIC;
+       REVOKE INSERT ON films FROM db_users;
+       ```
+- Updating a view
+     - Syntax. e.g.  ```UPDATE film SET kind = 'Dramatic' WHERE kind ='Drama'; ```
+     - Not all views are updateable:
+          - View is made up of one table
+          - Doesn't use a window or aggregate function.  \
+       when you update a view, you are updating the tables behind the view. Hence, only particular views are updatable. There are criteria for a view to be considered updatable. The criteria depend on the type of SQL being used. Generally, the view needs to be made up of one table and can't rely on a window or aggregate function.
+- Inserting into a view
+     - Generally, __avoid modifying data through views__. It's usually a good idea to use views for read-only purposes only. __Not all views are insertable.__
+     - e.g. ``` INSERT INTO film (code, title) VALUES ('T_601', 'Yojimbo'); ```
+- Dropping a view
+     - Syntax: DROP VIEW view_name [ CASCADE | RESTRICT ]
+     - __RESTRICT__ (default): returns an error if there are objects that depend on the view
+     - __CASCADE__ : drops view and any object that depends on that view.     
+- Redefining a view
+     - Syntax: CREATE OR REPLACE VIEW view_name AS new_query
+     - If a view with view_name exists, it is replaced.
+     - However, there are limitations to this.
+          - The new_query must generate the same column names, column order, and column data types as the existing query.
+          - The column output may be different, as long as those conditions are met.
+          - New columns may be added at the end.
+          - If this criteria can't be met, the solution is to drop the existing view and create a new one.
+- Altering a view
+     - ![img](images/03_73.png) \ This includes changing the name, owner, and schema of a view.
+
+#### Materialized views
+- Two types of views
+     - Views: also known as non-materialized views, remain virtual.
+     - Materialized views: physically materialized.
+- Materialized views
+     - ![img](images/03_74.png) \
+       a materialized view stores the query results. These query results are stored on disk. This means the query becomes precomputed via the view.
+       When you query a materialized view, it accesses the stored query results on the disk, rather than running the query like a non-materialized view and creating a virtual table. Materialized views are refreshed or rematerialized when prompted.
+       By refreshed or rematerialized, I mean that the query is run and the stored query results are updated. This can be scheduled depending on how often you expect the underlying query results are changing.
+       At Datacamp, some of our views are refreshed once-a-day during non-working hours, and others are refreshed every hour.
+- When to use materialized views?
+     - __Long running queries(queries with long execution time.__ Some queries take hours to complete if you are crunching a lot of data or have complex joins. Materialized views allow data scientists and analysts to run long queries and get results very quickly.)
+     - __Underlying query results don't change often.__ (you shouldn't use materialized views on data that is being updated often, because then analyses will be run too often on out-of-date data.)
+     - __Data warehouses because OLAP is not write-intensive.__  (__Materialized views are particularly useful in data warehouses__. Data warehouses are typically used for OLAP, meaning more for analysis than writing to data. This means less worry about out-of-date data. Furthermore, the same queries are often run in data warehouses, and the computational cost of them can add up.)
+- Implementing materialized views(In PostgreSQL)
+     - Syntax:
+       """
+       -- Create materialized view
+       CREATE MATERIALIZED VIEW my_mv AS SELECT * FROM table_name;
+       -- Refresh materialized view
+       REFRESH MATERIALIZED VIEW my_mv;
+       ```
+       There isn't a PostgresSQl command to schedule refreshing views. However, there are several ways to do so, like using cron jobs. cron is a UNIX based job scheduler.
+- Managing dependencies
+     - you need to manage dependencies when you refresh materialized views when you have dependencies. Why?
+     - e.g. two materialized views: X and Y. Y uses X in its query; meaning Y depends on X. Let' s say X has a more time-consuming query. If Y is refreshed before X's refresh is completed, then Y now has out-of-date data.
+     - How? Create a __dependency chain__ when refreshing views.
+     - Scheduling when to refresh. Refreshing them all at the same time is not the most efficient when you consider query time and dependencies.
+- Tools for managing dependencies (Airflow, Luigi)
+     - Use Directed Acyclic Graphs(DAGs) to keep trach of views
+     - Pipeline scheduler tools
+       Companies that have many materialized views, use directed acyclic graphs to track dependencies and pipeline scheduler tools, like Airflow and Luigi, to schedule and run REFRESH statements.
+       DAGs (A directed acyclic graph）is a finite directed graph with no cycles. the directed arrows reflect a dependency in a certain direction where one node depends on another. The no cycles part is important because two views can't depend on each other - only one can rely on another
 
 ### Database Management
+You will learn how to grant database access based on user roles, how to partition tables into smaller pieces, what to keep in mind when integrating data, and which DBMS fits your business needs best.
+#### Database roles and access control
+- Database roles
+     - ![img](images/03_75.png)
+- Create / Alter a role
+     - e.g.
+       ```
+       --- Empty role: Create the data_analyst role
+       CREATE ROLE data_analyst;
+       --- Roles with some attributes set
+       --- create the role intern, specifying the password attribute and valid until date attribute.
+       CREATE ROLE intern WITH PASSWORD 'Password' VALID UNTIL '2020-01-01';
+       --- create an admin role with the ability to create databases
+       CREATE ROLE admin CREATEDB;
+       --- change an attribute for an already created role: allowing the admin role to create roles too.
+       ALTER ROLE admin CREATEROLE;
+       --- Create a role with the ability to create databases (CREATEDB) and to create roles (CREATEROLE).
+       CREATE ROLE admins WITH CREATEDB CREATEROLE;
+       --- Create a role called marta that has one attribute: the ability to login (LOGIN).
+       CREATE ROLE marta LOGIN;
+       ```
+- GRANT and REVOKE privileges from roles
+     - Syntax is the same as view. The available privileges in PostfreSQL are: SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER, CREATE, CONNECT, TEMPORARY, EXECUTE, and USAGE.
+- Users and groups (are both roles)
+     - ![img](images/03_76.png)
+     - ???a common misunderstanding: a role can be a user role or a group role. A role may be a member of other roles, and we call the larger role a group. As this graphic shows, the concept of roles encompasses the concepts of “users” and “groups”.
+       __Database roles - that is, user roles AND group roles - are conceptually completely separate from operating system users. Sometimes you will create a user role that belongs to one specific user, but that's not required.__
+     - Think of the data_analyst role as a group role: you want all of your data analysts to have the same level of access. Think of the intern role as a user role. Sometimes you'll use the actual user's name. __e.g.__ Say Alex is hired as an intern to support the data analysts, so you want them to have the same level of access.     
+       ```
+       --- Group role
+       CREATE ROLE data_analyst;
+       --- User role
+       CREATE ROLE alex WITH PASSWORD 'Password' VALID UNTIL '2020-01-01';
+       --- add the user role alex to the group role data_analyst. Alex can do data analyst work now!
+       GRANT data_analyst TO alex;
+       --- use REVOKE to remove them from the group.
+       REVOKE data_analyst FROM alex;
+       ```
+- Common PostgreSQL roles
+     - ![img](images/03_77.png) \ PostgreSQL has a set of default roles, which provide access to commonly needed privileged capabilities and information. These are beyond the scope of this course.
+- Benefits and pitfalls of roles
+     - Benefits
+          - Roles live on after users are deleted.
+          - Roles can be created before user accounts
+          - Save DBAs(database administrators) time
+      - Pitfalls : sometimes a role gives an individual too much access. 
+
+#### Table partitioning
+- Partitioning: split table into multiple small parts. Partitioning is part of physical data model.
+- Two types of partitions: vertical partitioning, horizontal partitioning
+- Vertical partitioning
+     - Vertical partitioning splits up a table vertically by its columns, even when it's already fully normalized. e.g. ![img](images/03_78.png)
+       It has four columns. After vertical partitioning, you could end up with two tables: one for the first three columns, and another for the last column. We can link them through a shared key. __Let's say the fourth column, containing a long description, is retrieved very rarely. We could store the second table on a slower medium.__ Doing this would improve query time for the first table, as we need to scan less data for search queries.
+- Horizontal partitioning
+     - Instead of splitting tables up over the columns, you can also split up tables over the rows. For example, you could split up data according to a timestamp. \
+       ![img](images/03_79.png) \
+       e.g. after PostgreSQL 10. Create partitions according to the timestamp, and partition them by quarter. First, you add the PARTITION BY clause to your table creation statement. You pass it the column you want to partition by, 'timestamp' in our case. Next, you have to create the partitions. To do this, use the PARTITION OF clause to create tables for the specific partitions. You can specify rules to partition by in the same statement. For a timestamp, you could use particular ranges of values, like this. Finally, it's advised to add an index to the column you used for partitioning.
+     - Pros/cons of horizontal partitioning
+       ![img](images/03_80.png)
+       Horizontal partitioning can help by optimizing indices, increasing the chance heavily-used parts of the index fit in memory.   You could also move rarely accessed partitions to a slower medium.    Both OLAP and OLTP can benefit from partitioning. \
+       There are some downsides though, as partitioning an existing table can be a hassle: you have to create a new table and copy over the data. Additionally, we can not always set the same type of constraints on a partitioned table, for example, the PRIMARY KEY constraint.
+     - Retation to sharding: When horizontal partitioning is applied to spread a table over several machines, it's called sharding. You can see how this relates to massively parallel processing databases, where each node, or machine, can do calculations on specific shards.
+- Practice:
+     - Create horizontal partitions in PostgreSQL. Here, you'll be using __a list partition instead of a range partition__. __For list partitions, you form partitions by checking whether the partition key is in a list of values or not.   To do this, we partition by LIST instead of RANGE. When creating the partitions, you should check if the values are IN a list of values.__ ![img](images/03_81.png)
+
+#### Data integration
+- 
+
+#### Picking a Database Management System(DBMS)
 
 
 ![img](images/03_29.png)
