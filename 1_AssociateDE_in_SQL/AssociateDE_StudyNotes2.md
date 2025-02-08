@@ -700,17 +700,52 @@ You will learn how to grant database access based on user roles, how to partitio
      - Create horizontal partitions in PostgreSQL. Here, you'll be using __a list partition instead of a range partition__. __For list partitions, you form partitions by checking whether the partition key is in a list of values or not.   To do this, we partition by LIST instead of RANGE. When creating the partitions, you should check if the values are IN a list of values.__ ![img](images/03_81.png)
 
 #### Data integration
-- 
+- What is data integration?
+     - what if your data is spread across different databases, formats, schemas and technologies? That's where data integration comes into play.
+     - __Data Integration combines data from different sources, formats, technologies to provide users with a translated and unified view of that data.__
+- Bussiness case examples:
+     -  A company could want a 360-degree customer view, to see all information departments have about a customer in a unified place.
+     -  one company acquiring another, and needs to combine their respective databases.
+     -  Legacy systems are also a common case of data integration.
+     -  An insurance company with claims in old and new systems, would need to integrate data to query all claims at once.
+- There are a few things to consider when integrating data:
+     - What is your final goal? Your unified data model could be used to create dashboards, like graphs of daily sales, or data products, such as a recommendation engine. The final data model needs to be fast enough for your use-case.
+     - Data sources: Which formats is each data source stored in? For example, it could be PostgreSQL, MongoDB or a CSV.
+     - Unified data model format: Which format should the unified data model take? For example, Redshift, a data warehouse service offered by AWS.   
+     - Specific example: Say DataCamp is launching a skill assessment module. Marketing wants to know which customers to target. They need information from sales, stored in PostgreSQL, to see which customers can afford the new product. They also need information from the product department, stored in MongoDB to identify potential early adopters. ![img](images/03_82.png)
+     - Update cadence: How often do you want to update the data?  Updating daily would probably be sufficient for sales data. For a scenario like air traffic, you want real-time updates. Your data sources can have different update cadences.
+     - Transformations:
+          - Your sources are in different formats, you need to make sure they can be assembled together.
+          - A transformation is a program that extracts content from the table and transforms it into the chosen format for the unified model.
+          - These transformations can be hand-coded, but you would have to make and maintain a transformation for each data source. You can also use data integration tool(Airflow or Scriptella), which provides the needed ETL.
+          - When choosing your tool, you must ensure that it's __flexible__ enough to connect to all of your data sources. __Reliable__, so that it can still be maintained in a year. And it should __scale__ well, anticipating an increase in data volume and sources.
+          - Automated testing and proactive alerts: If any data gets corrupted on its way to the unified data model, the system lets you know. For example, you could aggregate sales data after each transformation and ensure that the total amount remains the same.
+          - Security: if data access was originally restricted, it should remain restricted in the unified data model. e.g. anonymize the credit card numbers data during ETL so that analysts can only access the first four numbers, to identify the type of card being used.
+          - Data governance: For data governance purposes, you need to consider lineage: for effective auditing, you should know where the data originated and where it is used at all times.
 
 #### Picking a Database Management System(DBMS)
-
-
-![img](images/03_29.png)
-
-
-
-
-
- 
+- A DBMS is a system software for creating and maintaining databases. The DBMS manages three important aspects: the __data__, the __database schema__ which defines the database’s logical structure, and the __database engine__ that allows data to be accessed, locked and modified. Essentially, __the DBMS serves as an interface between the database and end users or application programs.__  [img](images/03_83.png)
+- DBMS types : SQL DBMS, NoSQL DBMS
+     - SQL DBMS (Relational DataBase Management System). Query language:SQL. e.g. SQL Server, PostgreSQL, and Oracle SQL. Used for fixed structure and doesn’t need frequent modifications
+     - NoSQL DBMS(Non-relational DBMSs).
+       [img](images/03_84.png) \
+       NoSQL is a good choice for __those companies experiencing rapid data growth with no clear schema definitions. NoSQL offers much more flexibility than a SQL DBMS and is a solid option for companies who must analyze large quantities of data or manage data structures that vary.__
+       1. NoSQL DBMS- key-value store :
+          A key-value database stores combinations of keys and values: Key- unique identifier, Value: anything, from simple objects, like integers or strings, to more complex objects, like JSON structures.
+          Use cases: They are most frequently used for managing session information in web applications. For example, managing shopping carts for online buyers.
+          example: Redis.
+       3. NoSQL DBMS- document store
+          similar to key-value, but values(=documents) are structured.
+          documents provide some structure and encoding of the managed data. That structure can be used to do more advanced queries on the data instead of just value retrieval. 
+          Use cases: content management applications such as blogs and video platforms. Each entity that the application tracks can be stored as a single document. 
+          example: mongoDB          
+       5. NoSQL DBMS- columnar database
+          store data in columns (__columnar databases store each column in a separate file in the system’s storage.__ This allows for databases that are more scalable, and faster at scale. )
+          Scalable
+          Use case: big data analytics where speed is important
+          example: cassandra
+       7. NoSQL DBMS- graph database
+          ![img](images/03_85.png) \
+          Here, the data is interconnected and best represented as a graph. This method is capable of lots of complexity. Graph databases are used by most social networks and pretty much any website that recommends anything based on your behavior.
 
 
