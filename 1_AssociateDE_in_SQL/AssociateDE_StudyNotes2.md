@@ -9,6 +9,10 @@
         - [1.Your first database](#1-your-first-database)
         - [2.Better data quality with constraints](#2-better-data-quality-with-constraintsidea-of-database-and-rules) 
    - [Database Design](#database-design)
+        - [Processing, Storing, and Organizing Data](#processing,-storing,-and-organizing-data)
+        - [Database Schemas and Normalization](#database-schemas-and-normalization)
+        - [Database Views](#database-views)
+        - [Database Management](#database-management)
 - [Data Warehousing (AssociateDE_StudyNotes3)](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
    - Introduction to Snowflakes
