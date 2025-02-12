@@ -11,6 +11,27 @@
 - Tutorial: How to Install PostgreSQL
 
 
+
+
+### Snowflake SQL and key concepts
+#### Connecting to snowflake and DDL commands
+- we'll explore various methods of connecting to Snowflake and introduce basic Snowflake DDL commands.
+
+- 
+#### Snowflake database structure and DML
+#### Snowflake data type and data type conversion
+#### Functions, sorting, and grouping
+
+### Advance Snowflake SQL Concepts
+#### Joining in snowflake
+#### Subqueries
+#### Snowflake query optimization
+#### Handling semi-structured data
+#### Wrap-up
+
+
+
+
 # Understanding Data Visualization
 Doesn't cover Building data pipelines, or Analyzing warehouse data
 ## Project: Exploring London's Travel Network
