@@ -316,12 +316,42 @@ Another core component of Data warehouse implementations: OLAP, OLTP
   ![img](images/04_29.png) 
 ## Introduction to Snowflakes
 ### Introduction to Snowflake: Architecture, Competitors, and SnowflakeSQL
+#### What is snowflake
+- what is snowflake? Snowflake is a  cloud-based data warehouse that utilizes a columnar data storage model. \
+     Row database: Postgres, MySQL, Oracle, Microsoft SQL Server \
+     Columnar database: Snowflake, Amazon Redshift, Google BigQuery, Vertica \
+     It has a unique ability to connect with multiple cloud providers like AWS, GCP, or Azure.
+- Snowflake use cases: Business Intelligence, Data Science, Data Ingestion, Data warehousing, Data Sharing.
+- Snowflake SQL is quite similar to PostgreSQL. Even though Snowflake automatically capitalizes column names by default, fundamental commands like SELECT will operate in much the same way as they do in PostgreSQL. 
+#### Snowflake architecture
+- storage and compute - how data is stored and processed. \
+     - ![img](images/04_30.png) 
+     - Traditionally, many databases follow a "Shared-Disk" architecture. In this, each node(a processor or computer) has its own memory and CPU but shares the same storage, allowing any node to read or write to any part of the shared storage. \
+     - "shared-nothing" architecture separates storage and compute. Here, every node has its own disk storage.
+     - Snowflake adopts "Decoupling storage & compute". \
+       This ensures data is __stored efficiently__ and __processed independently__, allowing each component to operate without relying on the other. \
+       benefit? Enhanced scalability. Snowflake can store more data or process data faster independently, leading to quicker responses and more cost-effective operations.
+- snowflake architecture: Snowflake uses a hybrid architecture. While it has a shared storage layer centralizing all data, its computing is distinctively decoupled. \
+     ![img](images/04_31.png) 
+     - Storage layer \
+       
+     - Compute layer
+     - Cloud Services layer
+- 
+#### Snowflake Competitors and why use snowflake
+
 
 ### Snowflake SQL and key concepts
+#### Connecting to snowflake and DDL commands
+#### Snowflake database structure and DML
+#### Snowflake data type and data type conversion
+#### Functions, sorting, and grouping
 
 ### Advance Snowflake SQL Concepts
+#### Joining in snowflake
+#### Subqueries
+#### Snowflake query optimization
+#### Handling semi-structured data
+#### Wrap-up
 
 
-# Understanding Data Visualization
-## Project: Exploring London's Travel Network
-# Tutorial: How to Install PostgreSQL
