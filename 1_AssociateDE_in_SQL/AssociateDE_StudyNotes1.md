@@ -13,12 +13,12 @@
    - MiniProject: Analyzing Students' Mental Health
 - [Database (AssociateDE_StudyNotes2)](AssociateDE_StudyNotes2.md)
    - Introduction to Relational Database in SQL
-   - Database Design
-- [Data Warehousing](AssociateDE_StudyNotes3.md)
+   - Database Design 
+- [Data Warehousing (AssociateDE_StudyNotes3)](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
-   - Introduction to Snowflakes
-- [Underdtanding Data Visualization]
-- [Project: Exploring London's Travel Network]
+- [Introduction to Snowflakes](#AssociateDE_StudyNotes4.md)
+- [Understanding Data Visualization]
+     - [Project: Exploring London's Travel Network]
 - Tutorial: How to Install PostgreSQL
 
 
