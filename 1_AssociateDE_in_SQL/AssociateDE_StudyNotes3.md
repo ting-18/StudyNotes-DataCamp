@@ -12,12 +12,12 @@
         - [Warehouse Architectures and Properties](#warehouse-architectures-and-properties)
         - [Data Warehouse Data Modeling](#data-warehouse-data-modeling)
         - [Implementation and Data Prep](#implementation-and-data-prep)
-- [Introduction to Snowflakes](#introduction-to-snowflakes)
-     - [Introduction to Snowflake: Architecture, Competitors, and SnowflakeSQL](#introduction-to-snowflake-architecture-competitors-and-snowflakesql)
-     - [Snowflake SQL and key concepts](#snowflake-sql-and-key-concepts)
-     - [Advance Snowflake SQL Concepts](#advance-snowflake-sql-concepts)
-- [Understanding Data Visualization](#undersdanding-data-visualization)
-     - [Project: Exploring London's Travel Network](#project-exploring-londons-travel-network)
+- [Introduction to Snowflakes](#AssociateDE_StudyNotes4.md)
+     - [Introduction to Snowflake: Architecture, Competitors, and SnowflakeSQL]
+     - [Snowflake SQL and key concepts]
+     - [Advance Snowflake SQL Concepts]
+- [Understanding Data Visualization]
+     - [Project: Exploring London's Travel Network]
 - Tutorial: How to Install PostgreSQL
 
 
