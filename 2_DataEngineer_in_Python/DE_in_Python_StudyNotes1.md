@@ -2,8 +2,11 @@
 - [Understanding Cloud Computing](#understanding-cloud-computing)
 - [Python](#python)
 
-
-
+- [ETL and ELT in Python](#etl-and-elt-in-python)
+    - [Introduction to Data Pipelines](#introduction-to-data-pipelines)
+    - [Building ETL pipelines](#building-etl-pipelines)
+    - [Advanced ETL techniques](#advanced-etl-techniques)
+    - [Deploying and Maintaining a Data Pipeline](#deploying-and-maintaining-a-data-pipeline)
 
 
 
@@ -46,6 +49,19 @@ More abstraction means less detail but easier management. The highest level of a
 
 # Project: Performing a Code Review
 # ETL and ELT in Python
+## Introduction to Data Pipelines
+### Introduction to ETL and ELT Pipelines
+
+### Building ETL and ELT Pipelines
+
+## Building ETL pipelines
+
+## Advanced ETL techniques
+
+## Deploying and Maintaining a Data Pipeline
+
+
+
 # Introduction to Apache Airflow in Python
 
 # Project: Building a Retail Data Pipeline
