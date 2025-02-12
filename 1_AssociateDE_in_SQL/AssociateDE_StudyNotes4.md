@@ -10,7 +10,7 @@
      - [Introduction to Snowflake: Architecture, Competitors, and SnowflakeSQL](#introduction-to-snowflake-architecture-competitors-and-snowflakesql)
      - [Snowflake SQL and key concepts](#snowflake-sql-and-key-concepts)
      - [Advance Snowflake SQL Concepts](#advance-snowflake-sql-concepts)
-- [Understanding Data Visualization](#undersdanding-data-visualization)
+- [Understanding Data Visualization](#understanding-data-visualization)
      - [Project: Exploring London's Travel Network](#project-exploring-londons-travel-network)
 - Tutorial: How to Install PostgreSQL
 
