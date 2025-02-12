@@ -15,9 +15,9 @@
         - [Database Management](#database-management)
 - [Data Warehousing (AssociateDE_StudyNotes3)](AssociateDE_StudyNotes3.md)
    - Data Warehousing Concepts
-   - Introduction to Snowflakes
-- [Understanding Data Visualization](#undersdanding-data-visualization)
-     - [Project: Exploring London's Travel Network](#project-exploring-londons-travel-network)
+- [Introduction to Snowflakes](#AssociateDE_StudyNotes4.md)
+- [Understanding Data Visualization]
+     - [Project: Exploring London's Travel Network]
 - Tutorial: How to Install PostgreSQL
 
 
