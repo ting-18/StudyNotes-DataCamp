@@ -1,6 +1,6 @@
 [_Previous (AssociateDE_StudyNotes1)_](AssociateDE_StudyNotes1.md) \
 [_Previous (AssociateDE_StudyNotes2)_](#AssociateDE_StudyNotes2.md) \
-[_Next (AssociateDE_StudyNotes4)_](#AssociateDE_StudyNotes4.md) \
+[_Next (AssociateDE_StudyNotes4)_](#AssociateDE_StudyNotes4.md) 
 
 # Associate Data Engineering in SQL - PART III
 
