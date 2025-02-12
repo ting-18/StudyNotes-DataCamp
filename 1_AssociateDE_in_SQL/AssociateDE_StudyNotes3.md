@@ -1,6 +1,6 @@
 [_Previous (AssociateDE_StudyNotes1)_](AssociateDE_StudyNotes1.md) \
-[_Previous (AssociateDE_StudyNotes2)_](#AssociateDE_StudyNotes2.md) \
-[_Next (AssociateDE_StudyNotes4)_](#AssociateDE_StudyNotes4.md) 
+[_Previous (AssociateDE_StudyNotes2)_](AssociateDE_StudyNotes2.md) \
+[_Next (AssociateDE_StudyNotes4)_](AssociateDE_StudyNotes4.md) 
 
 # Associate Data Engineering in SQL - PART III
 
@@ -12,7 +12,7 @@
         - [Warehouse Architectures and Properties](#warehouse-architectures-and-properties)
         - [Data Warehouse Data Modeling](#data-warehouse-data-modeling)
         - [Implementation and Data Prep](#implementation-and-data-prep)
-- [Introduction to Snowflakes](#AssociateDE_StudyNotes4.md)
+- [Introduction to Snowflakes](AssociateDE_StudyNotes4.md)
      - [Introduction to Snowflake: Architecture, Competitors, and SnowflakeSQL]
      - [Snowflake SQL and key concepts]
      - [Advance Snowflake SQL Concepts]
