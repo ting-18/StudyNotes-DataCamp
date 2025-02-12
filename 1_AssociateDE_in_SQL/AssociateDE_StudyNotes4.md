@@ -96,10 +96,8 @@
 
 
 
-
-
 # Understanding Data Visualization
-Doesn't cover Building data pipelines, or Analyzing warehouse data
+
 ## Project: Exploring London's Travel Network
 
 # Tutorial: How to Install PostgreSQL
