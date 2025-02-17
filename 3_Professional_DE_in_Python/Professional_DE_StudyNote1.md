@@ -37,11 +37,16 @@ You'll learn to build data warehouses, perform data modeling and transformations
     - See more in dbt -h or dbt documentations
 ### Creating a dbt project
 - What is a dbt project?
-      - ![img](images/03_01.png) 
-      - Projects __encompass all the needed (and optional) components for working with data within dbt__. \
-          - __Project configuration__ includes the project name, folder names, etc.
+    - Projects __encompass all the needed (and optional) components for working with data within dbt__.
+        - __Project configuration__ includes the project name, folder names, etc.
+        - __Data sources and destinations__
+        - __SQL queries and templates__ that define how to access and transform the data into the desired formats.
+        - A dbt project can also include documentation for the data and the relationships within it.
+    - It's important to note that a dbt project is __implemented as a folder structure__ on a given machine. As such, it can be easily copied, modified, or placed into source control as needed.
+    -       
+- How to create a new project?
+
   
-  __Data sources and destinations__, such as where the source data comes from, as well as any destination data warehouses. dbt projects also include the SQL queries and templates that define how to access and transform the data into the desired formats. A dbt project can also include documentation for the data and the relationships within it. It's important to note that a dbt project is implemented as a folder structure on a given machine. As such, it can be easily copied, modified, or placed into source control as needed. We'll cover each of these further in this and later chapters.
 - 
 ### Working with a first project
 
