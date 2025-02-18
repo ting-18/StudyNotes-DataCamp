@@ -7,7 +7,7 @@ Table of Content I
 - [Inroduction to dbt](#inroduction-to-dbt)
     - [Welcome to dbt](#welcome-to-dbt)
     - [dbt models](#dbt-models)
-    - [Testing & Documentation](#testing-&-documentation)
+    - [Testing and Documentation](#testing-and-documentation)
     - [Implementing dbt in production](#implementing-dbt-in-production)
 
 
@@ -201,7 +201,7 @@ Please note that in this circumstance, __materialized__ has a specific meaning i
     -  The next area to investigate are __the dbt logs__. The generic logs can be found in the logs directory under dbt.log. There is also a log file for each job called `run_results.json`. This log file contains various information about the tasks and can point out errors found during the run.
     -  Another trick is __manually reviewing the SQL output of the generated model__. The problem may be apparent upon review, but you can also copy the generated code into a SQL editor (ideally with access to the data objects) and verify it works as you expect.
     -  Finally, make sure to __verify your fixes__ work and don't cause other issues before continuing.
-## Testing & Documentation
+## Testing and Documentation
 ### Introduction to testing in dbt
 - 
 ### Creating singular tests
