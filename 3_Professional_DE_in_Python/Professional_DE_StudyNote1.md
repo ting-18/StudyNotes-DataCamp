@@ -35,8 +35,8 @@ You'll learn to build data warehouses, perform data modeling and transformations
     - Adapters provide connections to different data warehouses: dbt-snowflake, dbt-bigquery, and dbt-sqlserver.  some managed as part of the project, others that are managed by third-party volunteers or companies. 
     - There is also a managed version of dbt known as dbt Cloud. 
 - dbt subcommands
-    - dbt  or dbt -h : Show help content
-    - dbt <subcommand> -h : Help for subcommand
+    - `dbt`  or `dbt -h` : Show help content
+    - `dbt <subcommand> -h` : Help for subcommand
     - dbt init :Creates new dbt projects
     - dbt run : Runs the data generation/transformations process (and pushes updates to the warehouse. It should be run whenever there are model changes, or when the data process needs to be materialized.)
     - dbt test :Run the data quality tests available within dbt projects.
