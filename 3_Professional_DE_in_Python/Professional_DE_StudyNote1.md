@@ -7,7 +7,7 @@ Table of Content I
 - [Inroduction to dbt](#inroduction-to-dbt)
     - [Welcome to dbt](#welcome-to-dbt)
     - [dbt models](#dbt-models)
-    - [Testing & Documentation](#testing-documentation)
+    - [Testing & Documentation](#testing-&-documentation)
     - [Implementing dbt in production](#implementing-dbt-in-production)
 
 
