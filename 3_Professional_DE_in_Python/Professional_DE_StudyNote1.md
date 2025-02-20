@@ -390,3 +390,6 @@ except duckdb.CatalogException:
         - __`dbt seed` might not be complete for certain queries__ found in downstream models.
     - __`dbt build` will determine dependencies as a whole and run all tests prior to production changes__.
     - Note that __`dbt build` may be overkill in testing environments or if small changes are made__. In general, it's best to use `dbt build` if running against a production data warehouse, while the individual commands can be used in development or testing.
+### Review and Next
+![img](images/03_13.png) 
+http://docs.getdbt.com
