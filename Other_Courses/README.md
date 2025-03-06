@@ -69,8 +69,19 @@ Get historical Stock Market data from a Python library- yfinance.
 
 
 
-### Reproducing this repo
-
-- Environment setup
-
+### Reproducing this repo(Try these in a VM after finished this project)
+1. git clone
+2. Environment setup
+  - Set up Cloud Infrastructure \
+    Local setup terraform, GCP account, projectID
+    Excute
+    ```
+    #Git Bash shell
+    cd 1_terraform-gcp/terraform
+    terraform init
+    terraform plan
+    terraform apply
+    terraform destroy 
+    ```
+    
 - Credentials 
