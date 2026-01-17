@@ -12,6 +12,7 @@
         - [Warehouse Architectures and Properties](#warehouse-architectures-and-properties)
         - [Data Warehouse Data Modeling](#data-warehouse-data-modeling)
         - [Implementation and Data Prep](#implementation-and-data-prep)
+             - [Data warehouse design example](#!!!Data-warehouse-design-example!!!)
 - [Introduction to Snowflakes](AssociateDE_StudyNotes4.md)
      - [Introduction to Snowflake: Architecture, Competitors, and SnowflakeSQL]
      - [Snowflake SQL and key concepts]
